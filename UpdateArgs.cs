@@ -10,5 +10,7 @@ namespace SpotifyPlus
     {
         public string Username { get; set; }
         public List<string> topArtists {  get; set; }
+
+        public List<string> topSongs { get; set; }
     }
 }

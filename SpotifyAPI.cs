@@ -54,7 +54,10 @@ namespace SpotifyPlus
             utir.Limit = 10;
             var utar = await spotify.UserProfile.GetTopArtists(utir);
 
-            
+            //Request for top tracks
+            UsersTopItemsRequest tracksUtir = new UsersTopItemsRequest(TimeRange.ShortTerm);
+            tracksUtir.Limit = 5;
+            var tracksUtar = await spotify.UserProfile.GetTopTracks(tracksUtir);
 
             //package
             UpdateArgs args = new UpdateArgs();
@@ -62,12 +65,21 @@ namespace SpotifyPlus
 
             List<string> topArtists = new List<string>();
 
+            List<string> topTracks = new List<string>();
+
             //top artists
             foreach (var item in utar.Items)
             {
                 topArtists.Add(item.Name);
             }
             args.topArtists = topArtists;
+
+            //top tracks
+            foreach (var item in tracksUtar.Items)
+            {
+                topTracks.Add(item.Name);
+            }
+            args.topSongs = topTracks;
 
             //send
 
