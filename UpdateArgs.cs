@@ -9,6 +9,6 @@ namespace SpotifyPlus
     public class UpdateArgs : EventArgs
     {
         public string Username { get; set; }
-
+        public List<string> topArtists {  get; set; }
     }
 }

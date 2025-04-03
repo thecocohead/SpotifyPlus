@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 using SpotifyAPI.Web;
 using SpotifyAPI.Web.Auth;
 using Swan;
@@ -58,9 +59,15 @@ namespace SpotifyPlus
             //package
             UpdateArgs args = new UpdateArgs();
             args.Username = profile.DisplayName;
-            
-            //top artists
 
+            List<string> topArtists = new List<string>();
+
+            //top artists
+            foreach (var item in utar.Items)
+            {
+                topArtists.Add(item.Name);
+            }
+            args.topArtists = topArtists;
 
             //send
 
