@@ -38,7 +38,25 @@ namespace SpotifyPlus
             {
                 //sync
                 label3.Text = $"Username: {e.Username}";
-            }            
+            }
+
+            string artistlist = "Top Artists:\n";
+            int count = 1;
+            foreach (string artist in e.topArtists)
+            {
+                artistlist += count + ". " + artist + "\n";
+                count++;
+            }
+
+            if (label4.InvokeRequired) 
+                {
+                    //Another async call
+                    label4.Invoke((MethodInvoker)delegate { label4.Text = artistlist; });
+                } else
+                {
+                    //sync call
+                    label4.Text = artistlist;
+                }
         }
     }
 }
