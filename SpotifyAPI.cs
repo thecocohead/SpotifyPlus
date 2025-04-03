@@ -36,7 +36,7 @@ namespace SpotifyPlus
 
             var request = new LoginRequest(_server.BaseUri, "b13ac5dc0324440aa6f6be27785968f1", LoginRequest.ResponseType.Token)
             {
-                Scope = new List<string> { Scopes.UserReadEmail }
+                Scope = new List<string> { Scopes.UserReadEmail, Scopes.UserTopRead }
             };
             BrowserUtil.Open(request.ToUri());
         }
@@ -46,11 +46,21 @@ namespace SpotifyPlus
             await _server.Stop();
             var spotify = new SpotifyClient(response.AccessToken);
             // do calls with Spotify
-            var agony = await spotify.UserProfile.Current();
+            var profile = await spotify.UserProfile.Current();
+            //var tracks = await spotify.UserProfile.ToJson();
+
+            UsersTopItemsRequest utir = new UsersTopItemsRequest(TimeRange.ShortTerm);
+            utir.Limit = 10;
+            var utar = await spotify.UserProfile.GetTopArtists(utir);
+
+            
 
             //package
             UpdateArgs args = new UpdateArgs();
-            args.Username = agony.DisplayName;
+            args.Username = profile.DisplayName;
+            
+            //top artists
+
 
             //send
 
