@@ -64,7 +64,7 @@ namespace SpotifyPlus
 
             List<string> topArtists = new List<string>();
 
-            List<string> topTracks = new List<string>();
+            List<TrackInfo> topTracks = new List<TrackInfo>();
 
             //top artists
             foreach (var item in topArtistResponse.Items)
@@ -76,7 +76,23 @@ namespace SpotifyPlus
             //top tracks
             foreach (var item in topTracksResponse.Items)
             {
-                topTracks.Add(item.Name);
+                //create object
+                TrackInfo newTrack = new TrackInfo();
+
+                //find artists
+                List<string> artistList = new List<string>();
+                foreach (var artist in item.Artists)
+                {
+                    artistList.Add(artist.Name);
+                }
+
+                //items
+                newTrack.Title = item.Name;
+                newTrack.Artists = artistList;
+                newTrack.CoverImage = item.Album.Images[0].Url;
+
+                //add to list
+                topTracks.Add(newTrack);
             }
             args.topSongs = topTracks;
 
