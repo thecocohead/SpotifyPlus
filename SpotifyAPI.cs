@@ -48,13 +48,15 @@ namespace SpotifyPlus
             var spotify = new SpotifyClient(response.AccessToken);
             // do calls with Spotify
             var profile = await spotify.UserProfile.Current();
-            //var tracks = await spotify.UserProfile.ToJson();
 
-            UsersTopItemsRequest utir = new UsersTopItemsRequest(TimeRange.ShortTerm);
-            utir.Limit = 10;
-            var utar = await spotify.UserProfile.GetTopArtists(utir);
+            UsersTopItemsRequest topArtistRequest = new UsersTopItemsRequest(TimeRange.ShortTerm);
+            topArtistRequest.Limit = 10;
+            var topArtistResponse = await spotify.UserProfile.GetTopArtists(topArtistRequest);
 
-            
+            //Request for top tracks
+            UsersTopItemsRequest topTracksRequest = new UsersTopItemsRequest(TimeRange.ShortTerm);
+            topTracksRequest.Limit = 5;
+            var topTracksResponse = await spotify.UserProfile.GetTopTracks(topTracksRequest);
 
             //package
             UpdateArgs args = new UpdateArgs();
@@ -62,12 +64,37 @@ namespace SpotifyPlus
 
             List<string> topArtists = new List<string>();
 
+            List<TrackInfo> topTracks = new List<TrackInfo>();
+
             //top artists
-            foreach (var item in utar.Items)
+            foreach (var item in topArtistResponse.Items)
             {
                 topArtists.Add(item.Name);
             }
             args.topArtists = topArtists;
+
+            //top tracks
+            foreach (var item in topTracksResponse.Items)
+            {
+                //create object
+                TrackInfo newTrack = new TrackInfo();
+
+                //find artists
+                List<string> artistList = new List<string>();
+                foreach (var artist in item.Artists)
+                {
+                    artistList.Add(artist.Name);
+                }
+
+                //items
+                newTrack.Title = item.Name;
+                newTrack.Artists = artistList;
+                newTrack.CoverImage = item.Album.Images[0].Url;
+
+                //add to list
+                topTracks.Add(newTrack);
+            }
+            args.topSongs = topTracks;
 
             //send
 
