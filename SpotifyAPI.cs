@@ -129,99 +129,59 @@ namespace SpotifyPlus
             args.Username = profile.DisplayName;
 
             //Package user's Top Artists
-            List<string> topArtistsShort = new List<string>();
-            foreach (var item in topArtistResponseShort.Items)
-            {
-                topArtistsShort.Add(item.Name);
-            }
-            args.topArtistsShort = topArtistsShort;
-            List<string> topArtistsMedium = new List<string>();
-            foreach (var item in topArtistResponseMedium.Items)
-            {
-                topArtistsMedium.Add(item.Name);
-            }
-            args.topArtistsMedium = topArtistsMedium;
-            List<string> topArtistsLong = new List<string>();
-            foreach (var item in topArtistResponseLong.Items)
-            {
-                topArtistsLong.Add(item.Name);
-            }
-            args.topArtistsLong = topArtistsLong;
+
+            args.topArtistsShort = PackageTopArtists(topArtistResponseShort);
+            args.topArtistsMedium = PackageTopArtists(topArtistResponseMedium);
+            args.topArtistsLong = PackageTopArtists(topArtistResponseLong);
 
             //Package user's Top Tracks
-            List<TrackInfo> TopTracksShort = new List<TrackInfo>();
-            foreach (var item in topTracksResponseShort.Items)
-            {
-                //create object
-                TrackInfo newTrack = new TrackInfo();
 
-                //find artists
-                List<string> artistList = new List<string>();
-                foreach (var artist in item.Artists)
-                {
-                    artistList.Add(artist.Name);
-                }
-
-                //items
-                newTrack.Title = item.Name;
-                newTrack.Artists = artistList;
-                newTrack.CoverImage = item.Album.Images[0].Url;
-
-                //add to list
-                TopTracksShort.Add(newTrack);
-            }
-            args.topSongsShort = TopTracksShort;
-
-            List<TrackInfo> TopTracksMedium = new List<TrackInfo>();
-            foreach (var item in topTracksResponseMedium.Items)
-            {
-                //create object
-                TrackInfo newTrack = new TrackInfo();
-
-                //find artists
-                List<string> artistList = new List<string>();
-                foreach (var artist in item.Artists)
-                {
-                    artistList.Add(artist.Name);
-                }
-
-                //items
-                newTrack.Title = item.Name;
-                newTrack.Artists = artistList;
-                newTrack.CoverImage = item.Album.Images[0].Url;
-
-                //add to list
-                TopTracksMedium.Add(newTrack);
-            }
-            args.topSongsMedium = TopTracksMedium;
-
-            List<TrackInfo> TopTracksLong = new List<TrackInfo>();
-            foreach (var item in topTracksResponseLong.Items)
-            {
-                //create object
-                TrackInfo newTrack = new TrackInfo();
-
-                //find artists
-                List<string> artistList = new List<string>();
-                foreach (var artist in item.Artists)
-                {
-                    artistList.Add(artist.Name);
-                }
-
-                //items
-                newTrack.Title = item.Name;
-                newTrack.Artists = artistList;
-                newTrack.CoverImage = item.Album.Images[0].Url;
-
-                //add to list
-                TopTracksLong.Add(newTrack);
-            }
-            args.topSongsLong = TopTracksLong;
+            args.topSongsShort = PackageTopTracks(topTracksResponseShort);
+            args.topSongsMedium = PackageTopTracks(topTracksResponseMedium);
+            args.topSongsLong = PackageTopTracks(topTracksResponseLong);
 
             //Send to front end via method invocation
 
             Update?.Invoke(this, args);
         }
+
+        private List<TrackInfo> PackageTopTracks(UsersTopTracksResponse response)
+        {
+            List<TrackInfo> output = new List<TrackInfo>();
+            foreach (var item in response.Items)
+            {
+                //create object
+                TrackInfo newTrack = new TrackInfo();
+
+                //find artists
+                List<string> artistList = new List<string>();
+                foreach (var artist in item.Artists)
+                {
+                    artistList.Add(artist.Name);
+                }
+
+                //items
+                newTrack.Title = item.Name;
+                newTrack.Artists = artistList;
+                newTrack.CoverImage = item.Album.Images[0].Url;
+
+                //add to list
+                output.Add(newTrack);
+            }
+            return output;
+        }
+
+        private List<string> PackageTopArtists(UsersTopArtistsResponse response)
+        {
+            List<string> output = new List<string>();
+            foreach (var item in response.Items)
+            {
+                output.Add(item.Name);
+            }
+            return output;
+        }
+
+
 
         /// <summary>
         /// Error recieved from API
