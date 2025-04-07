@@ -15,9 +15,15 @@ namespace SpotifyPlus
         public string Username { get; set; }
 
         //Top artists as reported by Spotify
-        public List<string> topArtists {  get; set; }
+        public List<string> topArtistsShort {  get; set; }
+        public List<string> topArtistsMedium { get; set; }
+        public List<string> topArtistsLong { get; set; }
 
         //Top tracks as reported by Spotify - see TrackInfo.cs for breakdown
-        public List<TrackInfo> topSongs { get; set; }
+        public List<TrackInfo> topSongsShort { get; set; }
+        public List<TrackInfo> topSongsMedium { get; set; }
+        public List<TrackInfo> topSongsLong { get; set; }
+
+
     }
 }

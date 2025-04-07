@@ -97,15 +97,27 @@ namespace SpotifyPlus
              * TimeRange.LongTerm - for the last approx. year
              */
 
-            //Get user's 10 top artists
-            UsersTopItemsRequest topArtistRequest = new UsersTopItemsRequest(TimeRange.ShortTerm);
-            topArtistRequest.Limit = 10;
-            var topArtistResponse = await spotify.UserProfile.GetTopArtists(topArtistRequest);
+            //Get user's 10 top artists for each timeframe
+            UsersTopItemsRequest topArtistRequestShort = new UsersTopItemsRequest(TimeRange.ShortTerm);
+            UsersTopItemsRequest topArtistRequestMedium = new UsersTopItemsRequest(TimeRange.MediumTerm);
+            UsersTopItemsRequest topArtistRequestLong = new UsersTopItemsRequest(TimeRange.LongTerm);
+            topArtistRequestShort.Limit = 10;
+            topArtistRequestMedium.Limit = 10;
+            topArtistRequestLong.Limit = 10;
+            var topArtistResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
+            var topArtistResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
+            var topArtistResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
 
-            //Get user's 5 top tracks
-            UsersTopItemsRequest topTracksRequest = new UsersTopItemsRequest(TimeRange.ShortTerm);
-            topTracksRequest.Limit = 5;
-            var topTracksResponse = await spotify.UserProfile.GetTopTracks(topTracksRequest);
+            //Get user's 5 top tracks for each timeframe
+            UsersTopItemsRequest topTracksRequestShort = new UsersTopItemsRequest(TimeRange.ShortTerm);
+            UsersTopItemsRequest topTracksRequestMedium = new UsersTopItemsRequest(TimeRange.MediumTerm);
+            UsersTopItemsRequest topTracksRequestLong = new UsersTopItemsRequest(TimeRange.LongTerm);
+            topTracksRequestShort.Limit = 5;
+            topTracksRequestMedium.Limit = 5;
+            topTracksRequestLong.Limit = 5;
+            var topTracksResponseShort = await spotify.UserProfile.GetTopTracks(topTracksRequestShort);
+            var topTracksResponseMedium = await spotify.UserProfile.GetTopTracks(topTracksRequestMedium);
+            var topTracksResponseLong = await spotify.UserProfile.GetTopTracks(topTracksRequestLong);
 
 
             //Package information for sending to front end
@@ -117,16 +129,28 @@ namespace SpotifyPlus
             args.Username = profile.DisplayName;
 
             //Package user's Top Artists
-            List<string> topArtists = new List<string>();
-            foreach (var item in topArtistResponse.Items)
+            List<string> topArtistsShort = new List<string>();
+            foreach (var item in topArtistResponseShort.Items)
             {
-                topArtists.Add(item.Name);
+                topArtistsShort.Add(item.Name);
             }
-            args.topArtists = topArtists;
+            args.topArtistsShort = topArtistsShort;
+            List<string> topArtistsMedium = new List<string>();
+            foreach (var item in topArtistResponseMedium.Items)
+            {
+                topArtistsMedium.Add(item.Name);
+            }
+            args.topArtistsMedium = topArtistsMedium;
+            List<string> topArtistsLong = new List<string>();
+            foreach (var item in topArtistResponseLong.Items)
+            {
+                topArtistsLong.Add(item.Name);
+            }
+            args.topArtistsLong = topArtistsLong;
 
             //Package user's Top Tracks
-            List<TrackInfo> topTracks = new List<TrackInfo>();
-            foreach (var item in topTracksResponse.Items)
+            List<TrackInfo> TopTracksShort = new List<TrackInfo>();
+            foreach (var item in topTracksResponseShort.Items)
             {
                 //create object
                 TrackInfo newTrack = new TrackInfo();
@@ -144,9 +168,55 @@ namespace SpotifyPlus
                 newTrack.CoverImage = item.Album.Images[0].Url;
 
                 //add to list
-                topTracks.Add(newTrack);
+                TopTracksShort.Add(newTrack);
             }
-            args.topSongs = topTracks;
+            args.topSongsShort = TopTracksShort;
+
+            List<TrackInfo> TopTracksMedium = new List<TrackInfo>();
+            foreach (var item in topTracksResponseMedium.Items)
+            {
+                //create object
+                TrackInfo newTrack = new TrackInfo();
+
+                //find artists
+                List<string> artistList = new List<string>();
+                foreach (var artist in item.Artists)
+                {
+                    artistList.Add(artist.Name);
+                }
+
+                //items
+                newTrack.Title = item.Name;
+                newTrack.Artists = artistList;
+                newTrack.CoverImage = item.Album.Images[0].Url;
+
+                //add to list
+                TopTracksMedium.Add(newTrack);
+            }
+            args.topSongsMedium = TopTracksMedium;
+
+            List<TrackInfo> TopTracksLong = new List<TrackInfo>();
+            foreach (var item in topTracksResponseLong.Items)
+            {
+                //create object
+                TrackInfo newTrack = new TrackInfo();
+
+                //find artists
+                List<string> artistList = new List<string>();
+                foreach (var artist in item.Artists)
+                {
+                    artistList.Add(artist.Name);
+                }
+
+                //items
+                newTrack.Title = item.Name;
+                newTrack.Artists = artistList;
+                newTrack.CoverImage = item.Album.Images[0].Url;
+
+                //add to list
+                TopTracksLong.Add(newTrack);
+            }
+            args.topSongsLong = TopTracksLong;
 
             //Send to front end via method invocation
 
