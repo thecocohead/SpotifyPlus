@@ -94,6 +94,145 @@ namespace SpotifyPlus.Tests
         }
 
         [TestMethod()]
+        public void PackageTopTestsMultiArtist()
+        {
+            //Arrange
+            SpotifyAPI api = new SpotifyAPI();
+            UsersTopTracksResponse mockResponse = new UsersTopTracksResponse();
+            mockResponse.Items = new List<FullTrack>
+            {
+                new FullTrack {
+                    Name = "Test Track 1",
+                    Artists = new List<SimpleArtist>
+                    {
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 1-1"
+                        },
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 1-2"
+                        }
+                    },
+                    Album = new SimpleAlbum
+                    {
+                        Images = new List<Image>
+                        {
+                            new Image
+                            {
+                                Height = 640,
+                                Width = 640,
+                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 300,
+                                Width = 300,
+                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 64,
+                                Width = 64,
+                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
+                            }
+                        }
+                    }
+                },
+                new FullTrack {
+                    Name = "Test Track 2",
+                    Artists = new List<SimpleArtist>
+                    {
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 2-1"
+                        },
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 2-2"
+                        }
+                    },
+                    Album = new SimpleAlbum
+                    {
+                        Images = new List<Image>
+                        {
+                            new Image
+                            {
+                                Height = 640,
+                                Width = 640,
+                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 300,
+                                Width = 300,
+                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 64,
+                                Width = 64,
+                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
+                            }
+                        }
+                    }
+                },
+                new FullTrack {
+                    Name = "Test Track 3",
+                    Artists = new List<SimpleArtist>
+                    {
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 3-1"
+                        },
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 3-2"
+                        }
+                    },
+                    Album = new SimpleAlbum
+                    {
+                        Images = new List<Image>
+                        {
+                            new Image
+                            {
+                                Height = 640,
+                                Width = 640,
+                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 300,
+                                Width = 300,
+                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 64,
+                                Width = 64,
+                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
+                            }
+                        }
+                    }
+                },
+            };
+            //Act
+            var result = api.PackageTopTracks(mockResponse);
+
+            //Assert
+            Assert.IsTrue(result.Count == mockResponse.Items.Count);
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(result[i].Title, mockResponse.Items[i].Name);
+                Assert.AreEqual(result[i].CoverImage, mockResponse.Items[i].Album.Images[0].Url);
+                for (int j = 0; j < result[j].Artists.Count; j++)
+                {
+                    Assert.AreEqual(result[i].Artists[j], mockResponse.Items[i].Artists[j].Name);
+                }
+            }
+        }
+
+        [TestMethod()]
         public void PackageTopTracksEmptyTest()
         {
             //Arrange
@@ -104,6 +243,133 @@ namespace SpotifyPlus.Tests
             var result = api.PackageTopTracks(mockResponse);
             //Assert
             Assert.IsTrue(result.Count == 0);
+        }
+
+        [TestMethod()]
+        public void PackageTopTracksPartialTest()
+        {
+            //Arrange
+            SpotifyAPI api = new SpotifyAPI();
+            UsersTopTracksResponse mockResponse = new UsersTopTracksResponse();
+            mockResponse.Items = new List<FullTrack>
+            {
+                new FullTrack {
+                    Name = "Test Track 1",
+                    Artists = new List<SimpleArtist>
+                    {
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 1"
+                        }
+                    },
+                    Album = new SimpleAlbum
+                    {
+                        Images = new List<Image>
+                        {
+                            new Image
+                            {
+                                Height = 640,
+                                Width = 640,
+                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 300,
+                                Width = 300,
+                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 64,
+                                Width = 64,
+                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
+                            }
+                        }
+                    }
+                },
+                new FullTrack {
+                    Name = "Test Track 2",
+                    Artists = new List<SimpleArtist>
+                    {
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 2"
+                        }
+                    },
+                    Album = new SimpleAlbum
+                    {
+                        Images = new List<Image>
+                        {
+                            new Image
+                            {
+                                Height = 640,
+                                Width = 640,
+                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 300,
+                                Width = 300,
+                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 64,
+                                Width = 64,
+                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
+                            }
+                        }
+                    }
+                },
+                new FullTrack {
+                    Name = "Test Track 3",
+                    Artists = new List<SimpleArtist>
+                    {
+                        new SimpleArtist
+                        {
+                            Name = "Test Artist 3"
+                        }
+                    },
+                    Album = new SimpleAlbum
+                    {
+                        Images = new List<Image>
+                        {
+                            new Image
+                            {
+                                Height = 640,
+                                Width = 640,
+                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 300,
+                                Width = 300,
+                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
+                            },
+                            new Image
+                            {
+                                Height = 64,
+                                Width = 64,
+                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
+                            }
+                        }
+                    }
+                }
+            };
+            //Act
+            var result = api.PackageTopTracks(mockResponse);
+
+            //Assert
+            Assert.IsTrue(result.Count == mockResponse.Items.Count);
+            for (int i = 0; i < result.Count; i++)
+            {
+                Assert.AreEqual(result[i].Title, mockResponse.Items[i].Name);
+                Assert.AreEqual(result[i].CoverImage, mockResponse.Items[i].Album.Images[0].Url);
+                for (int j = 0; j < result[j].Artists.Count; j++)
+                {
+                    Assert.AreEqual(result[i].Artists[j], mockResponse.Items[i].Artists[j].Name);
+                }
+            }
         }
 
         [TestMethod()]
@@ -472,143 +738,7 @@ namespace SpotifyPlus.Tests
             }
         }
 
-        [TestMethod()]
-        public void PackageTopTestsMultiArtist()
-        {
-            //Arrange
-            SpotifyAPI api = new SpotifyAPI();
-            UsersTopTracksResponse mockResponse = new UsersTopTracksResponse();
-            mockResponse.Items = new List<FullTrack>
-            {
-                new FullTrack {
-                    Name = "Test Track 1",
-                    Artists = new List<SimpleArtist>
-                    {
-                        new SimpleArtist
-                        {
-                            Name = "Test Artist 1-1"
-                        },
-                        new SimpleArtist
-                        {
-                            Name = "Test Artist 1-2"
-                        }
-                    },
-                    Album = new SimpleAlbum
-                    {
-                        Images = new List<Image>
-                        {
-                            new Image
-                            {
-                                Height = 640,
-                                Width = 640,
-                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
-                            },
-                            new Image
-                            {
-                                Height = 300,
-                                Width = 300,
-                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
-                            },
-                            new Image
-                            {
-                                Height = 64,
-                                Width = 64,
-                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
-                            }
-                        }
-                    }
-                },
-                new FullTrack {
-                    Name = "Test Track 2",
-                    Artists = new List<SimpleArtist>
-                    {
-                        new SimpleArtist
-                        {
-                            Name = "Test Artist 2-1"
-                        },
-                        new SimpleArtist
-                        {
-                            Name = "Test Artist 2-2"
-                        }
-                    },
-                    Album = new SimpleAlbum
-                    {
-                        Images = new List<Image>
-                        {
-                            new Image
-                            {
-                                Height = 640,
-                                Width = 640,
-                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
-                            },
-                            new Image
-                            {
-                                Height = 300,
-                                Width = 300,
-                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
-                            },
-                            new Image
-                            {
-                                Height = 64,
-                                Width = 64,
-                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
-                            }
-                        }
-                    }
-                },
-                new FullTrack {
-                    Name = "Test Track 3",
-                    Artists = new List<SimpleArtist>
-                    {
-                        new SimpleArtist
-                        {
-                            Name = "Test Artist 3-1"
-                        },
-                        new SimpleArtist
-                        {
-                            Name = "Test Artist 3-2"
-                        }
-                    },
-                    Album = new SimpleAlbum
-                    {
-                        Images = new List<Image>
-                        {
-                            new Image
-                            {
-                                Height = 640,
-                                Width = 640,
-                                Url = "https://i.scdn.co/image/ab67616d0000b2737bfbad19306705ddcd07e756"
-                            },
-                            new Image
-                            {
-                                Height = 300,
-                                Width = 300,
-                                Url = "https://i.scdn.co/image/ab67616d00001e027bfbad19306705ddcd07e756"
-                            },
-                            new Image
-                            {
-                                Height = 64,
-                                Width = 64,
-                                Url = "https://i.scdn.co/image/ab67616d000048517bfbad19306705ddcd07e756"
-                            }
-                        }
-                    }
-                },
-            };
-            //Act
-            var result = api.PackageTopTracks(mockResponse);
 
-            //Assert
-            Assert.IsTrue(result.Count == mockResponse.Items.Count);
-            for (int i = 0; i < result.Count; i++)
-            {
-                Assert.AreEqual(result[i].Title, mockResponse.Items[i].Name);
-                Assert.AreEqual(result[i].CoverImage, mockResponse.Items[i].Album.Images[0].Url);
-                for (int j = 0; j < result[j].Artists.Count; j++)
-                {
-                    Assert.AreEqual(result[i].Artists[j], mockResponse.Items[i].Artists[j].Name);
-                }
-            }
-        }
+
     }
 }
