@@ -145,9 +145,13 @@ namespace SpotifyPlus
             Update?.Invoke(this, args);
         }
 
-        private List<TrackInfo> PackageTopTracks(UsersTopTracksResponse response)
+        public List<TrackInfo> PackageTopTracks(UsersTopTracksResponse response)
         {
             List<TrackInfo> output = new List<TrackInfo>();
+            if (response.Items.Count == 0)
+            {
+                return output;
+            }
             foreach (var item in response.Items)
             {
                 //create object
@@ -171,9 +175,13 @@ namespace SpotifyPlus
             return output;
         }
 
-        private List<string> PackageTopArtists(UsersTopArtistsResponse response)
+        public List<string> PackageTopArtists(UsersTopArtistsResponse response)
         {
             List<string> output = new List<string>();
+            if(response.Items.Count == 0)
+            {
+                return output;
+            }
             foreach (var item in response.Items)
             {
                 output.Add(item.Name);
