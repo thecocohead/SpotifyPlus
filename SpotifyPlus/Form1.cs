@@ -42,7 +42,7 @@ namespace SpotifyPlus
 
             string artistlist = "Top Artists:\n";
             int count = 1;
-            foreach (string artist in e.topArtists)
+            foreach (string artist in e.topArtistsShort)
             {
                 artistlist += count + ". " + artist + "\n";
                 count++;
