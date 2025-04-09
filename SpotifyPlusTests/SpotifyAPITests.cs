@@ -72,24 +72,15 @@ namespace SpotifyPlus.Tests
                 }
             };
 
-            List<string> expectedArtists = new List<string>
-            {
-                "Test Artist",
-                "Another Artist",
-                "Third Artist",
-                "Fourth Artist",
-                "Fifth Artist"
-            };
-
             //Act
-            var result = api.PackageTopArtists(mockResponse);
+            List<ArtistInfo> result = api.PackageTopArtists(mockResponse);
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.Count, 5);
+            Assert.AreEqual(mockResponse.Items.Count, result.Count);
             for (int i = 0; i < result.Count; i++)
             {
-                Assert.AreEqual(result[i], expectedArtists[i]);
+                Assert.AreEqual(result[i].Name, mockResponse.Items[i].Name);
+                Assert.AreEqual(result[i].Image, mockResponse.Items[i].Images[0].Url);
             }
         }
 

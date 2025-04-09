@@ -101,9 +101,9 @@ namespace SpotifyPlus
             UsersTopItemsRequest topArtistRequestShort = new UsersTopItemsRequest(TimeRange.ShortTerm);
             UsersTopItemsRequest topArtistRequestMedium = new UsersTopItemsRequest(TimeRange.MediumTerm);
             UsersTopItemsRequest topArtistRequestLong = new UsersTopItemsRequest(TimeRange.LongTerm);
-            topArtistRequestShort.Limit = 10;
-            topArtistRequestMedium.Limit = 10;
-            topArtistRequestLong.Limit = 10;
+            topArtistRequestShort.Limit = 5;
+            topArtistRequestMedium.Limit = 5;
+            topArtistRequestLong.Limit = 5;
             var topArtistResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
             var topArtistResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
             var topArtistResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
@@ -112,9 +112,9 @@ namespace SpotifyPlus
             UsersTopItemsRequest topTracksRequestShort = new UsersTopItemsRequest(TimeRange.ShortTerm);
             UsersTopItemsRequest topTracksRequestMedium = new UsersTopItemsRequest(TimeRange.MediumTerm);
             UsersTopItemsRequest topTracksRequestLong = new UsersTopItemsRequest(TimeRange.LongTerm);
-            topTracksRequestShort.Limit = 5;
-            topTracksRequestMedium.Limit = 5;
-            topTracksRequestLong.Limit = 5;
+            topTracksRequestShort.Limit = 10;
+            topTracksRequestMedium.Limit = 10;
+            topTracksRequestLong.Limit = 10;
             var topTracksResponseShort = await spotify.UserProfile.GetTopTracks(topTracksRequestShort);
             var topTracksResponseMedium = await spotify.UserProfile.GetTopTracks(topTracksRequestMedium);
             var topTracksResponseLong = await spotify.UserProfile.GetTopTracks(topTracksRequestLong);
@@ -175,16 +175,20 @@ namespace SpotifyPlus
             return output;
         }
 
-        public List<string> PackageTopArtists(UsersTopArtistsResponse response)
+        public List<ArtistInfo> PackageTopArtists(UsersTopArtistsResponse response)
         {
-            List<string> output = new List<string>();
+            List<ArtistInfo> output = new List<ArtistInfo>();
             if(response.Items.Count == 0)
             {
                 return output;
             }
             foreach (var item in response.Items)
             {
-                output.Add(item.Name);
+                //building the ArtistInfo object
+                ArtistInfo newArtist = new ArtistInfo();
+                newArtist.Name = item.Name;
+                newArtist.Image = item.Images[0].Url;
+                output.Add(newArtist);
             }
             return output;
         }
