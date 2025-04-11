@@ -97,27 +97,29 @@ namespace SpotifyPlus
              * TimeRange.LongTerm - for the last approx. year
              */
 
-            //Get user's 10 top artists for each timeframe
+            //Get user's 5 top artists for each timeframe
             UsersTopItemsRequest topArtistRequestShort = new UsersTopItemsRequest(TimeRange.ShortTerm);
             UsersTopItemsRequest topArtistRequestMedium = new UsersTopItemsRequest(TimeRange.MediumTerm);
             UsersTopItemsRequest topArtistRequestLong = new UsersTopItemsRequest(TimeRange.LongTerm);
-            topArtistRequestShort.Limit = 10;
-            topArtistRequestMedium.Limit = 10;
-            topArtistRequestLong.Limit = 10;
+            topArtistRequestShort.Limit = 5;
+            topArtistRequestMedium.Limit = 5;
+            topArtistRequestLong.Limit = 5;
             var topArtistResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
             var topArtistResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
             var topArtistResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
 
-            //Get user's 5 top tracks for each timeframe
+            //Get user's 10 top tracks for each timeframe
             UsersTopItemsRequest topTracksRequestShort = new UsersTopItemsRequest(TimeRange.ShortTerm);
             UsersTopItemsRequest topTracksRequestMedium = new UsersTopItemsRequest(TimeRange.MediumTerm);
             UsersTopItemsRequest topTracksRequestLong = new UsersTopItemsRequest(TimeRange.LongTerm);
-            topTracksRequestShort.Limit = 5;
-            topTracksRequestMedium.Limit = 5;
-            topTracksRequestLong.Limit = 5;
+            topTracksRequestShort.Limit = 10;
+            topTracksRequestMedium.Limit = 10;
+            topTracksRequestLong.Limit = 10;
             var topTracksResponseShort = await spotify.UserProfile.GetTopTracks(topTracksRequestShort);
             var topTracksResponseMedium = await spotify.UserProfile.GetTopTracks(topTracksRequestMedium);
             var topTracksResponseLong = await spotify.UserProfile.GetTopTracks(topTracksRequestLong);
+
+            //
 
 
             //Package information for sending to front end
@@ -133,6 +135,11 @@ namespace SpotifyPlus
             args.topArtistsShort = PackageTopArtists(topArtistResponseShort);
             args.topArtistsMedium = PackageTopArtists(topArtistResponseMedium);
             args.topArtistsLong = PackageTopArtists(topArtistResponseLong);
+
+            //Package user's Top Genres (Found within top artists)
+            args.topGenresShort = PackageTopGenres(topArtistResponseShort);
+            args.topGenresMedium = PackageTopGenres(topArtistResponseMedium);
+            args.topGenresLong = PackageTopGenres(topArtistResponseLong);
 
             //Package user's Top Tracks
 
@@ -189,7 +196,23 @@ namespace SpotifyPlus
             return output;
         }
 
-
+        //Currently gets all genres but does not split them up by the artist they are associated with
+        public List<string> PackageTopGenres(UsersTopArtistsResponse response)
+        {
+            List<string> output = new List<string>();
+            if (response.Items.Count == 0)
+            {
+                return output;
+            }
+            foreach (var item in response.Items)
+            {
+                foreach (var genre in item.Genres)
+                {        
+                   output.Add(genre);
+                }
+            }
+            return output;
+        }
 
         /// <summary>
         /// Error recieved from API
