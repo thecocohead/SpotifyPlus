@@ -39,10 +39,12 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -153,12 +155,22 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(label6);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(297, 458);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Genres";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(3, 10);
+            label6.Name = "label6";
+            label6.Size = new Size(50, 20);
+            label6.TabIndex = 8;
+            label6.Text = "label6";
             // 
             // Form1
             // 
@@ -182,6 +194,8 @@
             tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -199,5 +213,6 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
+        private Label label6;
     }
 }

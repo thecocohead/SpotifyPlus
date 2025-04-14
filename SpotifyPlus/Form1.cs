@@ -47,6 +47,7 @@ namespace SpotifyPlus
             label4.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
             label3.ForeColor = ColorTranslator.FromHtml("#1ED760");
             label5.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            label6.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
         }
 
 
@@ -124,6 +125,16 @@ namespace SpotifyPlus
             {
                 genrelist += count + ". " + genre + "\n";
                 count++;
+            }
+
+            if (label6.InvokeRequired)
+            {
+                //Another another another async call
+                label6.Invoke((MethodInvoker)delegate { label6.Text = genrelist; });
+            }
+            else
+            {
+                label6.Text = genrelist;
             }
         }
 
