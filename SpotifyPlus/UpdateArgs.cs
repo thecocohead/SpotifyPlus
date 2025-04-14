@@ -20,9 +20,9 @@ namespace SpotifyPlus
         public List<ArtistInfo> topArtistsLong { get; set; }
 
         //Top genres as reported by Spotify
-        public List<string> topGenresShort { get; set; }
-        public List<string> topGenresMedium { get; set; }
-        public List<string> topGenresLong { get; set; }
+        public List<GenreInfo> topGenresShort { get; set; }
+        public List<GenreInfo> topGenresMedium { get; set; }
+        public List<GenreInfo> topGenresLong { get; set; }
 
         //Top tracks as reported by Spotify - see TrackInfo.cs for breakdown
         public List<TrackInfo> topSongsShort { get; set; }

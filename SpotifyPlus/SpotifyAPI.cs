@@ -200,23 +200,76 @@ namespace SpotifyPlus
             return output;
         }
 
-        //Currently gets all genres but does not split them up by the artist they are associated with
-        public List<string> PackageTopGenres(UsersTopArtistsResponse response)
+        //Gets all genres from their associated artist and lists them by artist
+        public List<GenreInfo> PackageTopGenres(UsersTopArtistsResponse response)
         {
-            List<string> output = new List<string>();
+            List<GenreInfo> unsortedOutput = new List<GenreInfo>();
+            List<GenreInfo> output = new List<GenreInfo>();
             if (response.Items.Count == 0)
             {
                 return output;
             }
             foreach (var item in response.Items)
             {
+                //Get all genres from the artist response
                 foreach (var genre in item.Genres)
-                {        
-                   output.Add(genre);
+                {
+                    //Check if the genre already is in the output
+                    bool genreExists = false;
+
+                    foreach (var genreInOutput in unsortedOutput)
+                    {
+                        //Increment the genre count if the genre exists
+                        if (genreInOutput.GenreName.Equals(genre))
+                        {
+                            genreInOutput.GenreCount++;
+                            genreExists = true;
+                            break;
+                         }
+                    }
+
+                    //Add the genre if it doesn't exist
+                    if(!genreExists)
+                    {
+                        GenreInfo newGenre = new GenreInfo();
+                        newGenre.GenreName = genre;
+                        newGenre.GenreCount = 1;
+                        unsortedOutput.Add(newGenre);
+                    }
                 }
             }
+
+            //Sort the list
+            int unsortedOutputCount = unsortedOutput.Count;
+            while(output.Count < unsortedOutputCount)
+            { 
+                //Find the top genre in the unsorted list
+                GenreInfo topGenre = new GenreInfo();
+                topGenre.GenreCount = 0;
+                foreach (var unsortedGenre in unsortedOutput)
+                {
+                    if (unsortedGenre.GenreCount > topGenre.GenreCount)
+                    {
+                        topGenre.GenreName = unsortedGenre.GenreName;
+                        topGenre.GenreCount = unsortedGenre.GenreCount;
+                    }
+                }
+
+                //Add the top genre to output
+                output.Add(topGenre);
+
+                //Remove the top genre from the unsorted list
+                for (int i = 0; i < unsortedOutput.Count; i++)
+                {
+                    if (topGenre.GenreName.Equals(unsortedOutput[i].GenreName))
+                    {
+                        unsortedOutput.RemoveAt(i);
+                    }
+                }
+            }
+
             return output;
-        }
+        }//Package Top Genres
 
         /// <summary>
         /// Error recieved from API
