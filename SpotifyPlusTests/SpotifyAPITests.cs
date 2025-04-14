@@ -13,6 +13,7 @@ namespace SpotifyPlus.Tests
     [TestClass()]
     public class SpotifyAPITests
     {
+        // Package Top Artists Tests 
         [TestMethod()]
         public void PackageTopArtistsEmptyTest()
         {
@@ -222,6 +223,8 @@ namespace SpotifyPlus.Tests
                 }
             }
         }
+
+        //Package Top Tracks Tests
 
         [TestMethod()]
         public void PackageTopTracksEmptyTest()
@@ -729,7 +732,214 @@ namespace SpotifyPlus.Tests
             }
         }
 
+        //Package Top Genres Tests
 
+        [TestMethod()]
+        public void PackageTopGenresEmptyTest()
+        {
+            //Arrange
+            SpotifyAPI api = new SpotifyAPI();
+            UsersTopArtistsResponse mockResponse = new UsersTopArtistsResponse();
+            mockResponse.Items = new List<FullArtist>();
+            //Act
+            List<string> response = api.PackageTopGenres(mockResponse);
+            //Assert
+            Assert.IsTrue(response.Count == mockResponse.Items.Count);
+        }
+
+        [TestMethod()]
+        public void PackageTopGenresNonConflictingTest()
+        {
+            //Arrange
+            SpotifyAPI api = new SpotifyAPI();
+            UsersTopArtistsResponse mockResponse = new UsersTopArtistsResponse();
+            mockResponse.Items = new List<FullArtist> {
+                new FullArtist
+                {
+                    Name = "Test Artist 1",
+                    Genres = new List<string>
+                    {
+                        "Pop",
+                        "Rock"
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 2",
+                    Genres = new List<string>
+                    {
+                        "Jazz",
+                        "Blues"
+                    }
+                }
+            };
+            //Act
+            List<string> response = api.PackageTopGenres(mockResponse);
+
+            //Assert
+            Assert.IsTrue(response[0] == mockResponse.Items[0].Genres[0]);
+            Assert.IsTrue(response[1] == mockResponse.Items[0].Genres[1]);
+            Assert.IsTrue(response[2] == mockResponse.Items[1].Genres[0]);
+            Assert.IsTrue(response[3] == mockResponse.Items[1].Genres[1]);
+        }
+
+        [TestMethod()]
+        public void PackageTopGenresConflictingTest()
+        {
+            //Arrange
+            SpotifyAPI api = new SpotifyAPI();
+            UsersTopArtistsResponse mockResponse = new UsersTopArtistsResponse();
+            mockResponse.Items = new List<FullArtist> {
+                new FullArtist
+                {
+                    Name = "Test Artist 1",
+                    Genres = new List<string>
+                    {
+                        "Pop",
+                        "Rock"
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 2",
+                    Genres = new List<string>
+                    {
+                        "Pop",
+                        "Jazz"
+                    }
+                }
+            };
+            //Act
+            List<string> response = api.PackageTopGenres(mockResponse);
+            //Assert
+            Assert.IsTrue(response[0] == "Pop");
+            Assert.IsTrue(response[1] == "Rock");
+            Assert.IsTrue(response[2] == "Jazz");
+        }
+
+        [TestMethod()]
+        public void PackageTopGenresSizeTest()
+        {
+            //Arrange
+            SpotifyAPI api = new SpotifyAPI();
+            UsersTopArtistsResponse mockResponse = new UsersTopArtistsResponse();
+            mockResponse.Items = new List<FullArtist> {
+                new FullArtist
+                {
+                    Name = "Test Artist 1",
+                    Genres = new List<string>
+                    {
+                        "Pop",
+                        "Rock"
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 2",
+                    Genres = new List<string>
+                    {
+                        "Blues",
+                        "Jazz"
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 2",
+                    Genres = new List<string>
+                    {
+                        "Punk",
+                        "Metal"
+                    }
+                }
+            };
+            //Act
+            List<string> response = api.PackageTopGenres(mockResponse);
+
+            //Assert
+            Assert.IsTrue(response.Count == 5);
+            Assert.IsTrue(response[0] == mockResponse.Items[0].Genres[0]);
+            Assert.IsTrue(response[1] == mockResponse.Items[0].Genres[1]);
+            Assert.IsTrue(response[2] == mockResponse.Items[1].Genres[0]);
+            Assert.IsTrue(response[3] == mockResponse.Items[1].Genres[1]);
+            Assert.IsTrue(response[4] == mockResponse.Items[2].Genres[0]);
+        }
+
+        [TestMethod()]
+        public void PackageTopGenresTopTest()
+        {
+            //Arrange
+            SpotifyAPI api = new SpotifyAPI();
+            UsersTopArtistsResponse mockResponse = new UsersTopArtistsResponse();
+            mockResponse.Items = new List<FullArtist> {
+                new FullArtist
+                {
+                    Name = "Test Artist 1",
+                    Genres = new List<string>
+                    {
+                        "Punk",
+                        "Jazz",
+                        "Rock", 
+                        "Blues",
+                        "Pop"
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 2",
+                    Genres = new List<string>
+                    {
+                        "Rock",
+                        "Jazz",
+                        "Blues",
+                        "Pop",
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 3",
+                    Genres = new List<string>
+                    {
+                        "Pop",
+                        "Blues",
+                        "Jazz",
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 4",
+                    Genres = new List<string>
+                    {
+                        "Jazz",
+                        "Pop",
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 5",
+                    Genres = new List<string>
+                    {
+                        "Pop",
+                    }
+                },
+                new FullArtist
+                {
+                    Name = "Test Artist 6",
+                    Genres = new List<string>
+                    {
+                        "Metal"
+                    }
+                },
+            };
+            //Act
+            List<string> response = api.PackageTopGenres(mockResponse);
+            //Assert
+            Assert.IsTrue(response.Count == 5);
+            Assert.IsTrue(response[0] == "Pop");
+            Assert.IsTrue(response[1] == "Jazz");
+            Assert.IsTrue(response[2] == "Blues");
+            Assert.IsTrue(response[3] == "Rock");
+            Assert.IsTrue(response[4] == "Punk");
+        }
 
     }
 }
