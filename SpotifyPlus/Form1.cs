@@ -22,6 +22,12 @@ namespace SpotifyPlus
             this.BackColor = System.Drawing.ColorTranslator.FromHtml("#121212");
 
             //Color settings for main connect button
+
+            //Initialize event handlers for button
+            button1.MouseDown += button1_MouseDown;
+            button1.MouseUp += button1_MouseUp;
+            button1.MouseLeave += button1_MouseLeave;
+            //Initial color settings
             button1.FlatStyle = FlatStyle.Flat;
             button1.BackColor = ColorTranslator.FromHtml("#121212");
             button1.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
@@ -41,6 +47,12 @@ namespace SpotifyPlus
             label4.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
             label3.ForeColor = ColorTranslator.FromHtml("#1ED760");
             label5.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+        }
+
+
+        private void button1_MouseLeave(object? sender, EventArgs e)
+        {
+            button1.BackColor = ColorTranslator.FromHtml("#121212"); ;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,6 +173,18 @@ namespace SpotifyPlus
             }
         }
 
+        //Function for when the connect button is pressed
+        private void button1_MouseDown(object sender, MouseEventArgs e)
+        {
+            button1.BackColor = ColorTranslator.FromHtml("#1f1f1f");
+        }
+
+        //Function for when the connect button is released
+        private void button1_MouseUp(object sender, MouseEventArgs e)
+        {
+            button1.BackColor = ColorTranslator.FromHtml("#121212");
+        }
+        //Function to handle the mouse leaving the connect button mid press
 
 
     }
