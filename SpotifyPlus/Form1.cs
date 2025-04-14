@@ -100,6 +100,19 @@ namespace SpotifyPlus
                 //Another another async call
                 label5.Invoke((MethodInvoker)delegate { label5.Text = tracklist; });
             }
+            else
+            {
+                label5.Text = tracklist;
+            }
+
+            //Section for controlling Top Genre listing
+            string genrelist = "Top Genres:\n";
+            count = 1;
+            foreach (string genre in e.topGenresShort)
+            {
+                genrelist += count + ". " + genre + "\n";
+                count++;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
