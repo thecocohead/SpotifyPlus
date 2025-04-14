@@ -182,16 +182,20 @@ namespace SpotifyPlus
             return output;
         }
 
-        public List<string> PackageTopArtists(UsersTopArtistsResponse response)
+        public List<ArtistInfo> PackageTopArtists(UsersTopArtistsResponse response)
         {
-            List<string> output = new List<string>();
+            List<ArtistInfo> output = new List<ArtistInfo>();
             if(response.Items.Count == 0)
             {
                 return output;
             }
             foreach (var item in response.Items)
             {
-                output.Add(item.Name);
+                //building the ArtistInfo object
+                ArtistInfo newArtist = new ArtistInfo();
+                newArtist.Name = item.Name;
+                newArtist.Image = item.Images[0].Url;
+                output.Add(newArtist);
             }
             return output;
         }
