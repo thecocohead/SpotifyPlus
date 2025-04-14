@@ -742,7 +742,7 @@ namespace SpotifyPlus.Tests
             UsersTopArtistsResponse mockResponse = new UsersTopArtistsResponse();
             mockResponse.Items = new List<FullArtist>();
             //Act
-            List<string> response = api.PackageTopGenres(mockResponse);
+            List<GenreInfo> response = api.PackageTopGenres(mockResponse);
             //Assert
             Assert.IsTrue(response.Count == mockResponse.Items.Count);
         }
@@ -774,13 +774,13 @@ namespace SpotifyPlus.Tests
                 }
             };
             //Act
-            List<string> response = api.PackageTopGenres(mockResponse);
+            List<GenreInfo> response = api.PackageTopGenres(mockResponse);
 
             //Assert
-            Assert.IsTrue(response[0] == mockResponse.Items[0].Genres[0]);
-            Assert.IsTrue(response[1] == mockResponse.Items[0].Genres[1]);
-            Assert.IsTrue(response[2] == mockResponse.Items[1].Genres[0]);
-            Assert.IsTrue(response[3] == mockResponse.Items[1].Genres[1]);
+            Assert.IsTrue(response[0].GenreName == mockResponse.Items[0].Genres[0]);
+            Assert.IsTrue(response[1].GenreName == mockResponse.Items[0].Genres[1]);
+            Assert.IsTrue(response[2].GenreName == mockResponse.Items[1].Genres[0]);
+            Assert.IsTrue(response[3].GenreName == mockResponse.Items[1].Genres[1]);
         }
 
         [TestMethod()]
@@ -810,11 +810,11 @@ namespace SpotifyPlus.Tests
                 }
             };
             //Act
-            List<string> response = api.PackageTopGenres(mockResponse);
+            List<GenreInfo> response = api.PackageTopGenres(mockResponse);
             //Assert
-            Assert.IsTrue(response[0] == "Pop");
-            Assert.IsTrue(response[1] == "Rock");
-            Assert.IsTrue(response[2] == "Jazz");
+            Assert.IsTrue(response[0].GenreName == "Pop");
+            Assert.IsTrue(response[1].GenreName == "Rock");
+            Assert.IsTrue(response[2].GenreName == "Jazz");
         }
 
         [TestMethod()]
@@ -853,15 +853,15 @@ namespace SpotifyPlus.Tests
                 }
             };
             //Act
-            List<string> response = api.PackageTopGenres(mockResponse);
+            List<GenreInfo> response = api.PackageTopGenres(mockResponse);
 
             //Assert
             Assert.IsTrue(response.Count == 5);
-            Assert.IsTrue(response[0] == mockResponse.Items[0].Genres[0]);
-            Assert.IsTrue(response[1] == mockResponse.Items[0].Genres[1]);
-            Assert.IsTrue(response[2] == mockResponse.Items[1].Genres[0]);
-            Assert.IsTrue(response[3] == mockResponse.Items[1].Genres[1]);
-            Assert.IsTrue(response[4] == mockResponse.Items[2].Genres[0]);
+            Assert.IsTrue(response[0].GenreName == mockResponse.Items[0].Genres[0]);
+            Assert.IsTrue(response[1].GenreName == mockResponse.Items[0].Genres[1]);
+            Assert.IsTrue(response[2].GenreName == mockResponse.Items[1].Genres[0]);
+            Assert.IsTrue(response[3].GenreName == mockResponse.Items[1].Genres[1]);
+            Assert.IsTrue(response[4].GenreName == mockResponse.Items[2].Genres[0]);
         }
 
         [TestMethod()]
@@ -921,24 +921,16 @@ namespace SpotifyPlus.Tests
                         "Pop",
                     }
                 },
-                new FullArtist
-                {
-                    Name = "Test Artist 6",
-                    Genres = new List<string>
-                    {
-                        "Metal"
-                    }
-                },
             };
             //Act
-            List<string> response = api.PackageTopGenres(mockResponse);
+            List<GenreInfo> response = api.PackageTopGenres(mockResponse);
             //Assert
             Assert.IsTrue(response.Count == 5);
-            Assert.IsTrue(response[0] == "Pop");
-            Assert.IsTrue(response[1] == "Jazz");
-            Assert.IsTrue(response[2] == "Blues");
-            Assert.IsTrue(response[3] == "Rock");
-            Assert.IsTrue(response[4] == "Punk");
+            Assert.IsTrue(response[0].GenreName == "Pop");
+            Assert.IsTrue(response[1].GenreName == "Jazz");
+            Assert.IsTrue(response[2].GenreName == "Blues");
+            Assert.IsTrue(response[3].GenreName == "Rock");
+            Assert.IsTrue(response[4].GenreName == "Punk");
         }
 
     }
