@@ -17,6 +17,14 @@ namespace SpotifyPlus
             //WinForms Initialization
             InitializeComponent();
             this.connection = connection;
+            //Background Color of window
+            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#121212");
+
+            //Color settings for main connect button
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.BackColor = ColorTranslator.FromHtml("#121212");
+            button1.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            button1.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#1ED760");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,7 +42,8 @@ namespace SpotifyPlus
             {
                 //async call
                 label3.Invoke((MethodInvoker)delegate { label3.Text = $"Username: {e.Username}"; });
-            } else
+            }
+            else
             {
                 //sync
                 label3.Text = $"Username: {e.Username}";
@@ -48,15 +57,21 @@ namespace SpotifyPlus
                 count++;
             }
 
-            if (label4.InvokeRequired) 
-                {
-                    //Another async call
-                    label4.Invoke((MethodInvoker)delegate { label4.Text = artistlist; });
-                } else
-                {
-                    //sync call
-                    label4.Text = artistlist;
-                }
+            if (label4.InvokeRequired)
+            {
+                //Another async call
+                label4.Invoke((MethodInvoker)delegate { label4.Text = artistlist; });
+            }
+            else
+            {
+                //sync call
+                label4.Text = artistlist;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
