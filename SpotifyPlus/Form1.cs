@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Net;
 using System.Security.Policy;
 using System.Threading.Tasks;
@@ -25,6 +26,21 @@ namespace SpotifyPlus
             button1.BackColor = ColorTranslator.FromHtml("#121212");
             button1.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
             button1.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#1ED760");
+
+            //UGH
+            tabPage1.BackColor = ColorTranslator.FromHtml("#121212");
+            tabPage2.BackColor = ColorTranslator.FromHtml("#121212");
+            tabPage3.BackColor = ColorTranslator.FromHtml("#121212");
+
+            //RAGH
+            tabControl1.Appearance = TabAppearance.Normal;
+            tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tabControl1.DrawItem += new DrawItemEventHandler(tabControl1_DrawItem);
+
+            label1.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            label4.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            label3.ForeColor = ColorTranslator.FromHtml("#1ED760");
+            label5.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,6 +50,7 @@ namespace SpotifyPlus
 
         }
 
+        //Use variable defined by short-med-long to change time frame listing? Depending on how we display time frames
         public void FormUpdate(object? sender, UpdateArgs e)
         {
 
@@ -49,6 +66,7 @@ namespace SpotifyPlus
                 label3.Text = $"Username: {e.Username}";
             }
 
+            //Section for controlling Top artists listing
             string artistlist = "Top Artists:\n";
             int count = 1;
             foreach (string artist in e.topArtistsShort)
@@ -67,11 +85,70 @@ namespace SpotifyPlus
                 //sync call
                 label4.Text = artistlist;
             }
+
+            //Section for controlling Top tracks listing
+            string tracklist = "Top Tracks:\n";
+            count = 1;
+            foreach (var track in e.topSongsShort)
+            {
+                tracklist += count + ". " + track.Title + "\n";
+                count++;
+            }
+
+            if (label5.InvokeRequired)
+            {
+                //Another another async call
+                label5.Invoke((MethodInvoker)delegate { label5.Text = tracklist; });
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+        //Function for controlling tab parameters
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            //Get the tab page
+            TabPage tabPage = tabControl1.TabPages[e.Index];
+
+            //Define the trapezoid tabs
+            int height = e.Bounds.Height;
+            int width = e.Bounds.Width;
+
+            //Defines Points for trapezoidal shape
+            Point[] trapezoidPoints = new Point[]
+            {
+        new Point(e.Bounds.Left + 7, e.Bounds.Top),  //Top-left
+        new Point(e.Bounds.Right - 7, e.Bounds.Top), //Top-right
+        new Point(e.Bounds.Right, e.Bounds.Bottom),   //Bottom-right
+        new Point(e.Bounds.Left, e.Bounds.Bottom)     //Bottom-left
+            };
+
+            //Create a GraphicsPath for the trapezoid
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                path.AddPolygon(trapezoidPoints);
+
+                //Fill color
+                Brush tabBrush = new SolidBrush(ColorTranslator.FromHtml("#121212")); 
+                e.Graphics.FillPath(tabBrush, path);
+
+                //Draw the tab text in the center of the tab
+                Brush textBrush = new SolidBrush(ColorTranslator.FromHtml("#FFFFFF"));
+                StringFormat stringFormat = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center
+                };
+
+                //Draw the tab text within the trapezoid
+                e.Graphics.DrawString(tabPage.Text, e.Font, textBrush, e.Bounds, stringFormat);
+            }
+        }
+
+
+
     }
 }
