@@ -137,6 +137,15 @@ namespace SpotifyPlus
             args.topArtistsLong = PackageTopArtists(topArtistResponseLong);
 
             //Package user's Top Genres (Found within top artists)
+
+            //Re-request top artist from top 5 to top 20. Seems to present a more accurate mix of genres for the end user. 
+            topArtistRequestShort.Limit = 20;
+            topArtistRequestMedium.Limit = 20;
+            topArtistRequestLong.Limit = 20;
+            topArtistResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
+            topArtistResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
+            topArtistResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
+
             args.topGenresShort = PackageTopGenres(topArtistResponseShort);
             args.topGenresMedium = PackageTopGenres(topArtistResponseMedium);
             args.topGenresLong = PackageTopGenres(topArtistResponseLong);
