@@ -240,7 +240,7 @@ namespace SpotifyPlus
             }
 
             //Sort the list
-            int unsortedOutputCount = unsortedOutput.Count;
+            int unsortedOutputCount = 5;
             while(output.Count < unsortedOutputCount)
             { 
                 //Find the top genre in the unsorted list
