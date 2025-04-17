@@ -15,6 +15,7 @@ namespace SpotifyPlus
         public string Title {  get; set; }
         //List of artists as reported by Spotify. Most songs only have one artist, but some may have multiple. 
         public List<string> Artists { get; set; }
+
         //URL of image hosted by spotify representing the album cover of the track. 
         public string CoverImage {  get; set; }
     }

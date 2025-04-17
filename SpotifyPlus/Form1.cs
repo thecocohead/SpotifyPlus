@@ -42,11 +42,11 @@ namespace SpotifyPlus
 
             string artistlist = "Top Artists:\n";
             int count = 1;
-            foreach (string artist in e.topArtistsShort)
-            {
-                artistlist += count + ". " + artist + "\n";
-                count++;
-            }
+            //foreach (string artist in e.topArtistsShort)
+            //{
+            //    artistlist += count + ". " + artist + "\n";
+            //    count++;
+            //}
 
             if (label4.InvokeRequired) 
                 {
@@ -57,6 +57,6 @@ namespace SpotifyPlus
                     //sync call
                     label4.Text = artistlist;
                 }
-        }
+        } 
     }
-}
+} 
