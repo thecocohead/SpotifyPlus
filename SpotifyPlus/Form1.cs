@@ -29,6 +29,10 @@ namespace SpotifyPlus
         public void FormUpdate(object? sender, UpdateArgs e)
         {
 
+            DisplayForm displayForm = new DisplayForm(0, e.Username, e.topArtistsMedium, e.topGenresMedium, e.topSongsMedium);
+            displayForm.ShowDialog();
+
+            /*
             //check if async call is required
             if (label3.InvokeRequired)
             {
@@ -57,6 +61,7 @@ namespace SpotifyPlus
                     //sync call
                     label4.Text = artistlist;
                 }
+            */
         } 
     }
 } 
