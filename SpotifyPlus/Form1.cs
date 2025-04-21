@@ -12,6 +12,7 @@ namespace SpotifyPlus
 
         public delegate void Update(object sender, UpdateArgs e);
         private SpotifyAPI connection;
+        private UpdateArgs userInformation;
         public Form1(SpotifyAPI connection)
         {
             //WinForms Initialization
@@ -29,39 +30,75 @@ namespace SpotifyPlus
         public void FormUpdate(object? sender, UpdateArgs e)
         {
 
-            DisplayForm displayForm = new DisplayForm(0, e.Username, e.topArtistsMedium, e.topGenresMedium, e.topSongsMedium);
-            displayForm.ShowDialog();
+            userInformation = e;
 
-            /*
-            //check if async call is required
-            if (label3.InvokeRequired)
+            //enable buttons
+            if (shortTermButton.InvokeRequired)
             {
                 //async call
-                label3.Invoke((MethodInvoker)delegate { label3.Text = $"Username: {e.Username}"; });
-            } else
+                shortTermButton.Invoke((MethodInvoker)delegate { shortTermButton.Enabled = true; });
+            }
+            else
             {
-                //sync
-                label3.Text = $"Username: {e.Username}";
+                shortTermButton.Enabled = true;
+            }
+            if (mediumTermButton.InvokeRequired)
+            {
+                //async call
+                mediumTermButton.Invoke((MethodInvoker)delegate { mediumTermButton.Enabled = true; });
+            }
+            else
+            {
+                mediumTermButton.Enabled = true;
+            }
+            if (longTermButton.InvokeRequired)
+            {
+                //async call
+                longTermButton.Invoke((MethodInvoker)delegate { longTermButton.Enabled = true; });
+            }
+            else
+            {
+                longTermButton.Enabled = true;
+            }
+            if (connectButton.InvokeRequired)
+            {
+                //async call
+                connectButton.Invoke((MethodInvoker)delegate { connectButton.Enabled = false; });
+            }
+            else
+            {
+                connectButton.Enabled = false;
             }
 
-            string artistlist = "Top Artists:\n";
-            int count = 1;
-            //foreach (string artist in e.topArtistsShort)
-            //{
-            //    artistlist += count + ". " + artist + "\n";
-            //    count++;
-            //}
+            if(this.InvokeRequired)
+            {
+                //async call
+                this.Invoke((MethodInvoker)delegate { this.WindowState = FormWindowState.Minimized; this.Show(); this.WindowState = FormWindowState.Normal; });
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Minimized;
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
 
-            if (label4.InvokeRequired) 
-                {
-                    //Another async call
-                    label4.Invoke((MethodInvoker)delegate { label4.Text = artistlist; });
-                } else
-                {
-                    //sync call
-                    label4.Text = artistlist;
-                }
-            */
-        } 
+        private void shortTermButton_Click(object sender, EventArgs e)
+        {
+            DisplayForm displayForm = new DisplayForm(0, userInformation.Username, userInformation.topArtistsShort, userInformation.topGenresShort, userInformation.topSongsShort);
+            displayForm.ShowDialog();
+        }
+
+        private void mediumTermButton_Click(object sender, EventArgs e)
+        {
+            DisplayForm displayForm = new DisplayForm(1, userInformation.Username, userInformation.topArtistsMedium, userInformation.topGenresMedium, userInformation.topSongsMedium);
+            displayForm.ShowDialog();
+        }
+
+        private void longTermButton_Click(object sender, EventArgs e)
+        {
+            DisplayForm displayForm = new DisplayForm(2, userInformation.Username, userInformation.topArtistsLong, userInformation.topGenresLong, userInformation.topSongsLong);
+            displayForm.ShowDialog();
+        }
     }
 } 
