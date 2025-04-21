@@ -28,101 +28,98 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
-            button1 = new Button();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
+            headerLabel = new Label();
+            connectButton = new Button();
+            shortTermButton = new Button();
+            mediumTermButton = new Button();
+            longTermButton = new Button();
             SuspendLayout();
             // 
-            // label1
+            // headerLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 48F);
-            label1.Location = new Point(18, 15);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(547, 128);
-            label1.TabIndex = 0;
-            label1.Text = "Spotify Plus";
+            headerLabel.AutoSize = true;
+            headerLabel.Font = new Font("Segoe UI", 48F);
+            headerLabel.Location = new Point(23, 19);
+            headerLabel.Margin = new Padding(5, 0, 5, 0);
+            headerLabel.Name = "headerLabel";
+            headerLabel.Size = new Size(730, 170);
+            headerLabel.TabIndex = 0;
+            headerLabel.Text = "Spotify Plus";
             // 
-            // label2
+            // connectButton
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(18, 159);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(442, 25);
-            label2.TabIndex = 1;
-            label2.Text = "we live in a nightmare nightmare nightmare nightmare";
+            connectButton.Font = new Font("Segoe UI", 48F);
+            connectButton.Location = new Point(89, 256);
+            connectButton.Margin = new Padding(5, 6, 5, 6);
+            connectButton.Name = "connectButton";
+            connectButton.Size = new Size(573, 236);
+            connectButton.TabIndex = 2;
+            connectButton.Text = "Connect";
+            connectButton.UseVisualStyleBackColor = true;
+            connectButton.Click += button1_Click;
             // 
-            // button1
+            // shortTermButton
             // 
-            button1.Font = new Font("Segoe UI", 48F);
-            button1.Location = new Point(18, 189);
-            button1.Margin = new Padding(4, 5, 4, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(441, 184);
-            button1.TabIndex = 2;
-            button1.Text = "Connect";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            shortTermButton.Enabled = false;
+            shortTermButton.Font = new Font("Segoe UI", 12F);
+            shortTermButton.Location = new Point(89, 549);
+            shortTermButton.Margin = new Padding(5, 6, 5, 6);
+            shortTermButton.Name = "shortTermButton";
+            shortTermButton.Size = new Size(573, 79);
+            shortTermButton.TabIndex = 3;
+            shortTermButton.Text = "Last 4 weeks";
+            shortTermButton.UseVisualStyleBackColor = true;
+            shortTermButton.Click += shortTermButton_Click;
             // 
-            // label3
+            // mediumTermButton
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(761, 15);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(100, 25);
-            label3.TabIndex = 3;
-            label3.Text = "Username: ";
+            mediumTermButton.Enabled = false;
+            mediumTermButton.Font = new Font("Segoe UI", 12F);
+            mediumTermButton.Location = new Point(89, 640);
+            mediumTermButton.Margin = new Padding(5, 6, 5, 6);
+            mediumTermButton.Name = "mediumTermButton";
+            mediumTermButton.Size = new Size(573, 79);
+            mediumTermButton.TabIndex = 4;
+            mediumTermButton.Text = "Last 6 Months";
+            mediumTermButton.UseVisualStyleBackColor = true;
+            mediumTermButton.Click += mediumTermButton_Click;
             // 
-            // label4
+            // longTermButton
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(744, 302);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(59, 25);
-            label4.TabIndex = 4;
-            label4.Text = "label4";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(537, 474);
-            label5.Name = "label5";
-            label5.Size = new Size(59, 25);
-            label5.TabIndex = 5;
-            label5.Text = "label5";
+            longTermButton.Enabled = false;
+            longTermButton.Font = new Font("Segoe UI", 12F);
+            longTermButton.Location = new Point(89, 731);
+            longTermButton.Margin = new Padding(5, 6, 5, 6);
+            longTermButton.Name = "longTermButton";
+            longTermButton.Size = new Size(573, 79);
+            longTermButton.TabIndex = 5;
+            longTermButton.Text = "Last Year";
+            longTermButton.UseVisualStyleBackColor = true;
+            longTermButton.Click += longTermButton_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1142, 750);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(button1);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Margin = new Padding(4, 5, 4, 5);
+            ClientSize = new Size(759, 960);
+            Controls.Add(longTermButton);
+            Controls.Add(mediumTermButton);
+            Controls.Add(shortTermButton);
+            Controls.Add(connectButton);
+            Controls.Add(headerLabel);
+            Margin = new Padding(5, 6, 5, 6);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Spotify Plus";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private Label label2;
-        private Button button1;
-        private Label label3;
-        private Label label4;
-        private Label label5;
+        private Label headerLabel;
+        private Button connectButton;
+        private Button shortTermButton;
+        private Button mediumTermButton;
+        private Button longTermButton;
     }
 }
