@@ -22,4 +22,4 @@ After successfully connecting to the Spotify API, the code makes calls to the AP
 
 ## Program Flow (Frontend)
 
-Once the API calls have been completed in the backend, the user's top tracks, artists, and genres are displayed to the user using Winforms. 
+Once the API calls have been completed in the backend, the user's top tracks, artists, and genres are displayed to the user using Winforms. The user can select which timeframe to view after connecting their account. 
