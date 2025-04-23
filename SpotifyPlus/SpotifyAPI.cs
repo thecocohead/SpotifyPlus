@@ -150,9 +150,9 @@ namespace SpotifyPlus
 
             //Package user's Top Genres (Found within top artists)
 
-            args.topGenresShort = PackageTopGenres(topArtistResponseShort);
-            args.topGenresMedium = PackageTopGenres(topArtistResponseMedium);
-            args.topGenresLong = PackageTopGenres(topArtistResponseLong);
+            args.topGenresShort = PackageTopGenres(topGenreResponseShort);
+            args.topGenresMedium = PackageTopGenres(topGenreResponseMedium);
+            args.topGenresLong = PackageTopGenres(topGenreResponseLong);
 
             //Package user's Top Tracks
 
