@@ -130,14 +130,20 @@ namespace SpotifyPlus
             int otherBar = 0;
             int maxBars = 5;
             int stupidcount = 0;
+            int x = topGenresHeader.Location.X;
             foreach (GenreInfo genre in genres.OrderByDescending(g => g.GenreCount))
             {
+                if (numBandsGenres == 0 || genres.All(g => g.GenreCount == 0))
+                {
+                    CreateGenreBar("No Genre Data", 100, new Point(334, txtArtist1.Location.Y));
+                    return;
+                }
                 if (genre.GenreCount > 0 && stupidcount < maxBars)
                 {
                     int percentage = genre.GenreCount * percentageUnit;
                     int y = artistLabels[stupidcount].Location.Y;
 
-                    CreateGenreBar($"{genre.GenreName} ({percentage}%)", percentage, new Point(334, y));
+                    CreateGenreBar($"{genre.GenreName} ({percentage}%)", percentage, new Point(x, y));
                     otherBar += percentage;
                     stupidcount++;
                 }
@@ -148,7 +154,7 @@ namespace SpotifyPlus
                 int remainder = 100 - otherBar;
                 int y = txtSongName6.Location.Y;
 
-                CreateGenreBar($"Other ({remainder}%)", remainder, new Point(334, y));
+                CreateGenreBar($"Other ({remainder}%)", remainder, new Point(x, y));
             }
 
 
