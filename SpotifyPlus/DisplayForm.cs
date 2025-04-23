@@ -207,14 +207,18 @@ namespace SpotifyPlus
             genreLabel.Font = new Font("Segoe UI", 16F);
             genreLabel.AutoSize = true;
 
+            this.Controls.Add(genreLabel);
+
+            int barY = genreLabel.Location.Y + genreLabel.Height + 2;
+
             ProgressBar genreBar = new ProgressBar();
-            genreBar.Location = new Point(location.X + 10, location.Y + 40);
+            genreBar.Location = new Point(location.X + 10, barY);
             genreBar.Size = new Size(200, 15);
             genreBar.Value = percentage;
             genreBar.ForeColor = ColorTranslator.FromHtml("#1DB954"); 
             genreBar.Style = ProgressBarStyle.Continuous;
 
-            this.Controls.Add(genreLabel);
+            
             this.Controls.Add(genreBar);
         }
 
