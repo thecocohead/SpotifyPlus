@@ -119,7 +119,19 @@ namespace SpotifyPlus
             var topTracksResponseMedium = await spotify.UserProfile.GetTopTracks(topTracksRequestMedium);
             var topTracksResponseLong = await spotify.UserProfile.GetTopTracks(topTracksRequestLong);
 
-            //
+            //Re-request top artist from top 5 to top 20. Seems to present a more accurate mix of genres for the end user. 
+            topArtistRequestShort.Limit = 20;
+            topArtistRequestMedium.Limit = 20;
+            topArtistRequestLong.Limit = 20;
+            topArtistResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
+            topArtistResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
+            topArtistResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
+
+            //Get the number of artists used. 
+            int artistCountShort = CountBands(topArtistResponseShort);
+            int artistCountMedium = CountBands(topArtistResponseMedium);
+            int artistCountLong = CountBands(topArtistResponseLong);
+
 
 
             //Package information for sending to front end
@@ -138,14 +150,6 @@ namespace SpotifyPlus
 
             //Package user's Top Genres (Found within top artists)
 
-            //Re-request top artist from top 5 to top 20. Seems to present a more accurate mix of genres for the end user. 
-            topArtistRequestShort.Limit = 20;
-            topArtistRequestMedium.Limit = 20;
-            topArtistRequestLong.Limit = 20;
-            topArtistResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
-            topArtistResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
-            topArtistResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
-
             args.topGenresShort = PackageTopGenres(topArtistResponseShort);
             args.topGenresMedium = PackageTopGenres(topArtistResponseMedium);
             args.topGenresLong = PackageTopGenres(topArtistResponseLong);
@@ -155,6 +159,11 @@ namespace SpotifyPlus
             args.topSongsShort = PackageTopTracks(topTracksResponseShort);
             args.topSongsMedium = PackageTopTracks(topTracksResponseMedium);
             args.topSongsLong = PackageTopTracks(topTracksResponseLong);
+
+            //Package number of artists used to calculate top genres
+            args.numArtistsShort = artistCountShort;
+            args.numArtistsMedium = artistCountMedium;
+            args.numArtistsLong = artistCountLong;
 
             //Send to front end via method invocation
 
@@ -279,6 +288,11 @@ namespace SpotifyPlus
 
             return output;
         }//Package Top Genres
+
+        public int CountBands(UsersTopArtistsResponse response)
+        {
+            return response.Items.Count;
+        }
 
         /// <summary>
         /// Error recieved from API

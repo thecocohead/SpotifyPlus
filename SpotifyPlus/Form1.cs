@@ -111,19 +111,19 @@ namespace SpotifyPlus
 
         private void shortTermButton_Click(object sender, EventArgs e)
         {
-            DisplayForm displayForm = new DisplayForm(0, userInformation.Username, userInformation.topArtistsShort, userInformation.topGenresShort, userInformation.topSongsShort);
+            DisplayForm displayForm = new DisplayForm(0, userInformation.Username, userInformation.topArtistsShort, userInformation.topGenresShort, userInformation.topSongsShort, userInformation.numArtistsShort);
             displayForm.ShowDialog();
         }
 
         private void mediumTermButton_Click(object sender, EventArgs e)
         {
-            DisplayForm displayForm = new DisplayForm(1, userInformation.Username, userInformation.topArtistsMedium, userInformation.topGenresMedium, userInformation.topSongsMedium);
+            DisplayForm displayForm = new DisplayForm(1, userInformation.Username, userInformation.topArtistsMedium, userInformation.topGenresMedium, userInformation.topSongsMedium, userInformation.numArtistsMedium);
             displayForm.ShowDialog();
         }
 
         private void longTermButton_Click(object sender, EventArgs e)
         {
-            DisplayForm displayForm = new DisplayForm(2, userInformation.Username, userInformation.topArtistsLong, userInformation.topGenresLong, userInformation.topSongsLong);
+            DisplayForm displayForm = new DisplayForm(2, userInformation.Username, userInformation.topArtistsLong, userInformation.topGenresLong, userInformation.topSongsLong, userInformation.numArtistsLong);
             displayForm.ShowDialog();
         }
     }

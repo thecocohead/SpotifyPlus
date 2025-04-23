@@ -29,6 +29,13 @@ namespace SpotifyPlus
         public List<TrackInfo> topSongsMedium { get; set; }
         public List<TrackInfo> topSongsLong { get; set; }
 
-        
+        //Number of artists used to calculate top genres
+        public int numArtistsShort { get; set; }
+        public int numArtistsMedium { get; set; }
+        public int numArtistsLong { get; set; }
+
+
+
+
     }
 }

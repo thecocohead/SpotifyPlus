@@ -13,7 +13,7 @@ namespace SpotifyPlus
 {
     public partial class DisplayForm : Form
     {
-        public DisplayForm(int timeFrame, string username, List<ArtistInfo> artists, List<GenreInfo> genres, List<TrackInfo> tracks)
+        public DisplayForm(int timeFrame, string username, List<ArtistInfo> artists, List<GenreInfo> genres, List<TrackInfo> tracks, int numBandsGenres)
         {
             //TimeFrame:
             // 0 = short
