@@ -117,8 +117,8 @@ namespace SpotifyPlus
             txtSongArtist10.Text = formatArtist(tracks[9]);
 
             //genres
-            int artistCount = genres.Sum(g => g.GenreCount);
-            int maxPercent = Math.Min(5, artistCount) * 20;
+            topGenresHeader.Text = "Top Genres of " + numBandsGenres + " artists";
+            
 
             //List to align genres listings to artists listings
             Label[] artistLabels = new Label[]
@@ -126,18 +126,29 @@ namespace SpotifyPlus
                 txtArtist1, txtArtist2, txtArtist3, txtArtist4, txtArtist5
             };
 
-
+            int percentageUnit = (numBandsGenres > 0) ? (100 / numBandsGenres) : 0;
+            int otherBar = 0;
+            int maxBars = 5;
             int stupidcount = 0;
             foreach (GenreInfo genre in genres.OrderByDescending(g => g.GenreCount))
             {
-                if (genre.GenreCount > 0 && stupidcount < artistLabels.Length)
+                if (genre.GenreCount > 0 && stupidcount < maxBars)
                 {
-                    int percentage = (int)Math.Round((genre.GenreCount * 100.0) / Math.Max(1, Math.Min(5, artistCount)));
+                    int percentage = genre.GenreCount * percentageUnit;
                     int y = artistLabels[stupidcount].Location.Y;
 
                     CreateGenreBar($"{genre.GenreName} ({percentage}%)", percentage, new Point(334, y));
+                    otherBar += percentage;
                     stupidcount++;
                 }
+               
+            }
+            if (otherBar < 100 && stupidcount == maxBars)
+            {
+                int remainder = 100 - otherBar;
+                int y = txtSongName6.Location.Y;
+
+                CreateGenreBar($"Other ({remainder}%)", remainder, new Point(334, y));
             }
 
 
