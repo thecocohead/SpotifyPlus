@@ -22,7 +22,6 @@ namespace SpotifyPlus
             InitializeComponent();
             this.BackColor = ColorTranslator.FromHtml("#121212");
 
-
             //set all pictureboxes to stretch images given
             imgArtist1.SizeMode = PictureBoxSizeMode.StretchImage;
             imgArtist2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -59,12 +58,13 @@ namespace SpotifyPlus
             RoundPictureBox(imgSong10, 4);
 
             userHeader.Text = username + "'s";
-            
+            //place Spotify logo directly after username string
             SpotifyLogo.Location = new System.Drawing.Point(
                 userHeader.Location.X + userHeader.Size.Width + 3,
                 userHeader.Location.Y + (userHeader.Height - SpotifyLogo.Height) / 2
                 );
             header.Text = "Stats";
+            //place 'Stats' directly after spotify logo
             header.Location = new System.Drawing.Point(
                 SpotifyLogo.Location.X + SpotifyLogo.Size.Width + 3,
                 SpotifyLogo.Location.Y + (SpotifyLogo.Height - header.Height) / 2
@@ -117,12 +117,26 @@ namespace SpotifyPlus
             txtSongArtist10.Text = formatArtist(tracks[9]);
 
             //genres
-            topGenres.Text = "";
-            foreach (GenreInfo genre in genres)
+            int artistCount = genres.Sum(g => g.GenreCount);
+            int maxPercent = Math.Min(5, artistCount) * 20;
+
+            //List to align genres listings to artists listings
+            Label[] artistLabels = new Label[]
             {
-                if (genre.GenreCount > 0)
+                txtArtist1, txtArtist2, txtArtist3, txtArtist4, txtArtist5
+            };
+
+
+            int stupidcount = 0;
+            foreach (GenreInfo genre in genres.OrderByDescending(g => g.GenreCount))
+            {
+                if (genre.GenreCount > 0 && stupidcount < artistLabels.Length)
                 {
-                    topGenres.Text += genre.GenreName + " (" + genre.GenreCount + ")\n";
+                    int percentage = (int)Math.Round((genre.GenreCount * 100.0) / Math.Max(1, Math.Min(5, artistCount)));
+                    int y = artistLabels[stupidcount].Location.Y;
+
+                    CreateGenreBar($"{genre.GenreName} ({percentage}%)", percentage, new Point(334, y));
+                    stupidcount++;
                 }
             }
 
@@ -165,6 +179,26 @@ namespace SpotifyPlus
 
             pic.Region = new Region(path);
 
+        }
+
+        private void CreateGenreBar(string genreName, int percentage, Point location)
+        {
+            Label genreLabel = new Label();
+            genreLabel.Text = genreName;
+            genreLabel.Location = location;
+            genreLabel.ForeColor = Color.White;
+            genreLabel.Font = new Font("Segoe UI", 16F);
+            genreLabel.AutoSize = true;
+
+            ProgressBar genreBar = new ProgressBar();
+            genreBar.Location = new Point(location.X + 10, location.Y + 40);
+            genreBar.Size = new Size(200, 15);
+            genreBar.Value = percentage;
+            genreBar.ForeColor = ColorTranslator.FromHtml("#1DB954"); 
+            genreBar.Style = ProgressBarStyle.Continuous;
+
+            this.Controls.Add(genreLabel);
+            this.Controls.Add(genreBar);
         }
 
 

@@ -72,7 +72,6 @@
             txtSongArtist8 = new Label();
             txtSongArtist9 = new Label();
             txtSongArtist10 = new Label();
-            topGenres = new Label();
             SpotifyLogo = new PictureBox();
             userHeader = new Label();
             ((System.ComponentModel.ISupportInitialize)imgArtist1).BeginInit();
@@ -532,17 +531,6 @@
             txtSongArtist10.TabIndex = 43;
             txtSongArtist10.Text = "Top Artists";
             // 
-            // topGenres
-            // 
-            topGenres.AutoSize = true;
-            topGenres.Font = new Font("Segoe UI", 8F);
-            topGenres.ForeColor = Color.White;
-            topGenres.Location = new Point(334, 160);
-            topGenres.Name = "topGenres";
-            topGenres.Size = new Size(38, 13);
-            topGenres.TabIndex = 44;
-            topGenres.Text = "label2";
-            // 
             // SpotifyLogo
             // 
             SpotifyLogo.Image = Properties.Resources.Spotify_Full_Logo_RGB_Green;
@@ -572,7 +560,6 @@
             ClientSize = new Size(983, 958);
             Controls.Add(userHeader);
             Controls.Add(SpotifyLogo);
-            Controls.Add(topGenres);
             Controls.Add(txtSongArtist10);
             Controls.Add(txtSongArtist9);
             Controls.Add(txtSongArtist8);
@@ -685,7 +672,6 @@
         private Label txtSongArtist8;
         private Label txtSongArtist9;
         private Label txtSongArtist10;
-        private Label topGenres;
         private PictureBox SpotifyLogo;
         private Label userHeader;
     }
