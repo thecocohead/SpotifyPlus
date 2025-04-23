@@ -127,7 +127,8 @@ namespace SpotifyPlus
             };
 
             int[] genrePercentages = new int[genres.Count];
-            int percentageUnit = (numBandsGenres > 0) ? (100 / numBandsGenres) : 0;
+            int totalGenreCount = genres.Sum(g => g.GenreCount);
+           
             int otherBar = 0;
             int maxBars = 5;
             int stupidcount = 0;
@@ -141,7 +142,7 @@ namespace SpotifyPlus
                 }
                 if (genre.GenreCount > 0 && stupidcount < maxBars)
                 {
-                    int percentage = genre.GenreCount * percentageUnit;
+                    int percentage = (int)Math.Round((genre.GenreCount * 100.0) / totalGenreCount);
                     int y = artistLabels[stupidcount].Location.Y;
 
                     CreateGenreBar($"{genre.GenreName} ({percentage}%)", percentage, new Point(x, y));
