@@ -73,7 +73,8 @@
             txtSongArtist9 = new Label();
             txtSongArtist10 = new Label();
             topGenres = new Label();
-            pictureBox1 = new PictureBox();
+            SpotifyLogo = new PictureBox();
+            userHeader = new Label();
             ((System.ComponentModel.ISupportInitialize)imgArtist1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgArtist2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgArtist3).BeginInit();
@@ -89,7 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)imgSong8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgSong9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgSong10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SpotifyLogo).BeginInit();
             SuspendLayout();
             // 
             // header
@@ -542,15 +543,26 @@
             topGenres.TabIndex = 44;
             topGenres.Text = "label2";
             // 
-            // pictureBox1
+            // SpotifyLogo
             // 
-            pictureBox1.Image = Properties.Resources.Spotify_Full_Logo_RGB_Green;
-            pictureBox1.Location = new Point(439, 18);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(197, 50);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 45;
-            pictureBox1.TabStop = false;
+            SpotifyLogo.Image = Properties.Resources.Spotify_Full_Logo_RGB_Green;
+            SpotifyLogo.Location = new Point(439, 18);
+            SpotifyLogo.Name = "SpotifyLogo";
+            SpotifyLogo.Size = new Size(197, 50);
+            SpotifyLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            SpotifyLogo.TabIndex = 45;
+            SpotifyLogo.TabStop = false;
+            // 
+            // userHeader
+            // 
+            userHeader.AutoSize = true;
+            userHeader.Font = new Font("Segoe UI", 32F);
+            userHeader.ForeColor = Color.Transparent;
+            userHeader.Location = new Point(246, 9);
+            userHeader.Name = "userHeader";
+            userHeader.Size = new Size(162, 59);
+            userHeader.TabIndex = 46;
+            userHeader.Text = "Header";
             // 
             // DisplayForm
             // 
@@ -558,7 +570,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(983, 958);
-            Controls.Add(pictureBox1);
+            Controls.Add(userHeader);
+            Controls.Add(SpotifyLogo);
             Controls.Add(topGenres);
             Controls.Add(txtSongArtist10);
             Controls.Add(txtSongArtist9);
@@ -621,7 +634,7 @@
             ((System.ComponentModel.ISupportInitialize)imgSong8).EndInit();
             ((System.ComponentModel.ISupportInitialize)imgSong9).EndInit();
             ((System.ComponentModel.ISupportInitialize)imgSong10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SpotifyLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -673,6 +686,7 @@
         private Label txtSongArtist9;
         private Label txtSongArtist10;
         private Label topGenres;
-        private PictureBox pictureBox1;
+        private PictureBox SpotifyLogo;
+        private Label userHeader;
     }
 }

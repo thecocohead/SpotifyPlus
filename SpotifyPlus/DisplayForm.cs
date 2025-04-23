@@ -22,6 +22,7 @@ namespace SpotifyPlus
             InitializeComponent();
             this.BackColor = ColorTranslator.FromHtml("#121212");
 
+
             //set all pictureboxes to stretch images given
             imgArtist1.SizeMode = PictureBoxSizeMode.StretchImage;
             imgArtist2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -57,8 +58,17 @@ namespace SpotifyPlus
             RoundPictureBox(imgSong9, 4);
             RoundPictureBox(imgSong10, 4);
 
-
-            header.Text = username + "'s                 Stats";
+            userHeader.Text = username + "'s";
+            
+            SpotifyLogo.Location = new System.Drawing.Point(
+                userHeader.Location.X + userHeader.Size.Width + 3,
+                userHeader.Location.Y + (userHeader.Height - SpotifyLogo.Height) / 2
+                );
+            header.Text = "Stats";
+            header.Location = new System.Drawing.Point(
+                SpotifyLogo.Location.X + SpotifyLogo.Size.Width + 3,
+                SpotifyLogo.Location.Y + (SpotifyLogo.Height - header.Height) / 2
+                );
             //artist images
             imgArtist1.ImageLocation = artists[0].Image;
             imgArtist2.ImageLocation = artists[1].Image;
@@ -156,6 +166,8 @@ namespace SpotifyPlus
             pic.Region = new Region(path);
 
         }
+
+
     }
 
 }
