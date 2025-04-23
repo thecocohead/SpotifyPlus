@@ -39,20 +39,18 @@
             // 
             headerLabel.AutoSize = true;
             headerLabel.Font = new Font("Segoe UI", 48F);
-            headerLabel.Location = new Point(23, 19);
-            headerLabel.Margin = new Padding(5, 0, 5, 0);
+            headerLabel.Location = new Point(12, 9);
             headerLabel.Name = "headerLabel";
-            headerLabel.Size = new Size(730, 170);
+            headerLabel.Size = new Size(369, 86);
             headerLabel.TabIndex = 0;
             headerLabel.Text = "Spotify Plus";
             // 
             // connectButton
             // 
             connectButton.Font = new Font("Segoe UI", 48F);
-            connectButton.Location = new Point(89, 256);
-            connectButton.Margin = new Padding(5, 6, 5, 6);
+            connectButton.Location = new Point(48, 120);
             connectButton.Name = "connectButton";
-            connectButton.Size = new Size(573, 236);
+            connectButton.Size = new Size(309, 111);
             connectButton.TabIndex = 2;
             connectButton.Text = "Connect";
             connectButton.UseVisualStyleBackColor = true;
@@ -62,10 +60,9 @@
             // 
             shortTermButton.Enabled = false;
             shortTermButton.Font = new Font("Segoe UI", 12F);
-            shortTermButton.Location = new Point(89, 549);
-            shortTermButton.Margin = new Padding(5, 6, 5, 6);
+            shortTermButton.Location = new Point(48, 257);
             shortTermButton.Name = "shortTermButton";
-            shortTermButton.Size = new Size(573, 79);
+            shortTermButton.Size = new Size(309, 37);
             shortTermButton.TabIndex = 3;
             shortTermButton.Text = "Last 4 weeks";
             shortTermButton.UseVisualStyleBackColor = true;
@@ -75,10 +72,9 @@
             // 
             mediumTermButton.Enabled = false;
             mediumTermButton.Font = new Font("Segoe UI", 12F);
-            mediumTermButton.Location = new Point(89, 640);
-            mediumTermButton.Margin = new Padding(5, 6, 5, 6);
+            mediumTermButton.Location = new Point(48, 300);
             mediumTermButton.Name = "mediumTermButton";
-            mediumTermButton.Size = new Size(573, 79);
+            mediumTermButton.Size = new Size(309, 37);
             mediumTermButton.TabIndex = 4;
             mediumTermButton.Text = "Last 6 Months";
             mediumTermButton.UseVisualStyleBackColor = true;
@@ -88,10 +84,9 @@
             // 
             longTermButton.Enabled = false;
             longTermButton.Font = new Font("Segoe UI", 12F);
-            longTermButton.Location = new Point(89, 731);
-            longTermButton.Margin = new Padding(5, 6, 5, 6);
+            longTermButton.Location = new Point(48, 343);
             longTermButton.Name = "longTermButton";
-            longTermButton.Size = new Size(573, 79);
+            longTermButton.Size = new Size(309, 37);
             longTermButton.TabIndex = 5;
             longTermButton.Text = "Last Year";
             longTermButton.UseVisualStyleBackColor = true;
@@ -99,15 +94,14 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(759, 960);
+            ClientSize = new Size(409, 414);
             Controls.Add(longTermButton);
             Controls.Add(mediumTermButton);
             Controls.Add(shortTermButton);
             Controls.Add(connectButton);
             Controls.Add(headerLabel);
-            Margin = new Padding(5, 6, 5, 6);
             Name = "Form1";
             Text = "Spotify Plus";
             ResumeLayout(false);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace SpotifyPlus
 {
@@ -19,6 +20,7 @@ namespace SpotifyPlus
             // 1 = medium
             // 2 = long
             InitializeComponent();
+            this.BackColor = ColorTranslator.FromHtml("#121212");
 
             //set all pictureboxes to stretch images given
             imgArtist1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -37,8 +39,26 @@ namespace SpotifyPlus
             imgSong9.SizeMode = PictureBoxSizeMode.StretchImage;
             imgSong10.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            //Round picture boxes
+            RoundPictureBox(imgArtist1, 4);
+            RoundPictureBox(imgArtist2, 4);
+            RoundPictureBox(imgArtist3, 4);
+            RoundPictureBox(imgArtist4, 4);
+            RoundPictureBox(imgArtist5, 4);
 
-            header.Text = username + "'s Spotify Stats";
+            RoundPictureBox(imgSong1, 4);
+            RoundPictureBox(imgSong2, 4);
+            RoundPictureBox(imgSong3, 4);
+            RoundPictureBox(imgSong4, 4);
+            RoundPictureBox(imgSong5, 4);
+            RoundPictureBox(imgSong6, 4);
+            RoundPictureBox(imgSong7, 4);
+            RoundPictureBox(imgSong8, 4);
+            RoundPictureBox(imgSong9, 4);
+            RoundPictureBox(imgSong10, 4);
+
+
+            header.Text = username + "'s                 Stats";
             //artist images
             imgArtist1.ImageLocation = artists[0].Image;
             imgArtist2.ImageLocation = artists[1].Image;
@@ -116,6 +136,25 @@ namespace SpotifyPlus
                 artistList = artistList.Remove(artistList.Length - 2);
                 return artistList;
             }
+        }
+        private void RoundPictureBox(PictureBox pic, int radius)
+        {
+            Rectangle bounds = new Rectangle(0, 0, pic.Width, pic.Height);
+            int diameter = radius * 2;
+            GraphicsPath path = new GraphicsPath();
+
+            //top left corner
+            path.AddArc(bounds.X, bounds.Y, diameter, diameter, 180, 90);
+            //top right corner
+            path.AddArc(bounds.Right - diameter, bounds.Y, diameter, diameter, 270, 90);
+            //bottom right corner
+            path.AddArc(bounds.Right - diameter, bounds.Bottom - diameter, diameter, diameter, 0, 90);
+            //bottom left corner
+            path.AddArc(bounds.X, bounds.Bottom - diameter, diameter, diameter, 90, 90);
+            path.CloseFigure();
+
+            pic.Region = new Region(path);
+
         }
     }
 

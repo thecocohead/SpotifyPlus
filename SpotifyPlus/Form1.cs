@@ -18,6 +18,32 @@ namespace SpotifyPlus
             //WinForms Initialization
             InitializeComponent();
             this.connection = connection;
+            //Background Color of window
+            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#121212");
+            //Spotify Plus Header
+            headerLabel.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+
+            //Standard Button Color Settings
+            connectButton.FlatStyle = FlatStyle.Flat;
+            connectButton.BackColor = ColorTranslator.FromHtml("#121212");
+            connectButton.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            connectButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#1ED760");
+            //Short Term Button
+            shortTermButton.FlatStyle = FlatStyle.Flat;
+            shortTermButton.BackColor = ColorTranslator.FromHtml("#121212");
+            shortTermButton.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            shortTermButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#1ED760");
+            //Medium Term Button
+            mediumTermButton.FlatStyle = FlatStyle.Flat;
+            mediumTermButton.BackColor = ColorTranslator.FromHtml("#121212");
+            mediumTermButton.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            mediumTermButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#1ED760");
+            //Long Term Button
+            longTermButton.FlatStyle = FlatStyle.Flat;
+            longTermButton.BackColor = ColorTranslator.FromHtml("#121212");
+            longTermButton.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+            longTermButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#1ED760");
+           
         }
 
         private void button1_Click(object sender, EventArgs e)

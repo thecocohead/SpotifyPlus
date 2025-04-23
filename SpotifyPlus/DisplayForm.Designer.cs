@@ -73,6 +73,7 @@
             txtSongArtist9 = new Label();
             txtSongArtist10 = new Label();
             topGenres = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)imgArtist1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgArtist2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgArtist3).BeginInit();
@@ -88,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)imgSong8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgSong9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgSong10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // header
@@ -95,7 +97,7 @@
             header.AutoSize = true;
             header.Font = new Font("Segoe UI", 32F);
             header.ForeColor = Color.Transparent;
-            header.Location = new Point(316, 9);
+            header.Location = new Point(246, 9);
             header.Name = "header";
             header.Size = new Size(162, 59);
             header.TabIndex = 0;
@@ -540,12 +542,23 @@
             topGenres.TabIndex = 44;
             topGenres.Text = "label2";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Spotify_Full_Logo_RGB_Green;
+            pictureBox1.Location = new Point(439, 18);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(197, 50);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 45;
+            pictureBox1.TabStop = false;
+            // 
             // DisplayForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(983, 958);
+            Controls.Add(pictureBox1);
             Controls.Add(topGenres);
             Controls.Add(txtSongArtist10);
             Controls.Add(txtSongArtist9);
@@ -608,6 +621,7 @@
             ((System.ComponentModel.ISupportInitialize)imgSong8).EndInit();
             ((System.ComponentModel.ISupportInitialize)imgSong9).EndInit();
             ((System.ComponentModel.ISupportInitialize)imgSong10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -659,5 +673,6 @@
         private Label txtSongArtist9;
         private Label txtSongArtist10;
         private Label topGenres;
+        private PictureBox pictureBox1;
     }
 }
