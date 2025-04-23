@@ -123,14 +123,14 @@ namespace SpotifyPlus
             topArtistRequestShort.Limit = 20;
             topArtistRequestMedium.Limit = 20;
             topArtistRequestLong.Limit = 20;
-            topArtistResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
-            topArtistResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
-            topArtistResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
+            var topGenreResponseShort = await spotify.UserProfile.GetTopArtists(topArtistRequestShort);
+            var topGenreResponseMedium = await spotify.UserProfile.GetTopArtists(topArtistRequestMedium);
+            var topGenreResponseLong = await spotify.UserProfile.GetTopArtists(topArtistRequestLong);
 
             //Get the number of artists used. 
-            int artistCountShort = CountBands(topArtistResponseShort);
-            int artistCountMedium = CountBands(topArtistResponseMedium);
-            int artistCountLong = CountBands(topArtistResponseLong);
+            int artistCountShort = CountBands(topGenreResponseShort);
+            int artistCountMedium = CountBands(topGenreResponseMedium);
+            int artistCountLong = CountBands(topGenreResponseLong);
 
 
 
