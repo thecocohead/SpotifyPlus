@@ -116,6 +116,29 @@ namespace SpotifyPlus
             txtSongArtist9.Text = formatArtist(tracks[8]);
             txtSongArtist10.Text = formatArtist(tracks[9]);
 
+            //line separators 
+            //I should have made this at the very beginning, live and learn I suppose.
+            Color[] lineColors =
+            {
+            ColorTranslator.FromHtml("#1DB954"),
+            ColorTranslator.FromHtml("#444444")
+            };
+
+            int lineoffset = 160;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Panel separator = new Panel();
+                separator.Height = 1; //Controls height, obviously
+                separator.Width = this.ClientSize.Width - 10; //This should make it almost the entire length of the window
+                separator.BackColor = lineColors[i % 2]; //Alternates between the two colors
+                separator.Location = new Point(10, lineoffset + 67); //Should Align with images, maybe need more.
+
+                this.Controls.Add(separator);
+
+                lineoffset += 70; 
+            }
+
             //genres
             topGenresHeader.Text = "Top Genres of " + numBandsGenres + " artists";
             
@@ -234,7 +257,10 @@ namespace SpotifyPlus
             this.Controls.Add(genreBar);
         }
 
+        //tbh I'm just putting functions on whenever I feel like it, what are you gonna do? Stop me?
 
     }
 
 }
+
+
