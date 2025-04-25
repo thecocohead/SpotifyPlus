@@ -2,9 +2,10 @@
 
 Spotify Plus is an extension to the music listenting service Spotify that allows users to see statistics about the listening habits, such as their top tracks, top artists, and top genres.
 
-## Licensing
+## Install Instructions
 
-License goes here
+**REQUIRED**: Email rlevisky@uccs.edu with the Spotify email being used to test the application! The Spotify API connection is in development mode (it's the only free option) and I need to manually add allowed users to the Spotify API. The app **WILL NOT** work unless the account is added to the interface. 
+An .exe is included with the submission. It is a standalone executable- there is no need to install or download anything other than the executable. It does not need to be ran with administrator, and any firewall prompts it generates can be safely ignored. 
 
 ## Code Conventions
 
