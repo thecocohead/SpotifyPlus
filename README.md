@@ -1,6 +1,6 @@
 ## Spotify Plus
 
-Spotify Plus is an extension to the music listenting service Spotify that allows users to see statistics about the listening habits, such as their top tracks, top artists, and top genres.
+Spotify Plus is an extension to the music listening service Spotify that allows users to see statistics about the listening habits, such as their top tracks, top artists, and top genres.
 
 ## Install Instructions
 
