@@ -10,8 +10,8 @@ An .exe is included with the submission. It is a standalone executable- there is
 ## Code Conventions
 
 - Spotify Plus was coded in the C# language within Microsoft's Visual Studio IDE. 
-- The code is __ lines long.
-- The code spans across __ files.
+- The code is 842 lines long.
+- The code spans across 8 files.
 
 ## API Connection
 
