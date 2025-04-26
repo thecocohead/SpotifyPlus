@@ -124,7 +124,21 @@ namespace SpotifyPlus
             ColorTranslator.FromHtml("#444444")
             };
 
-            int lineoffset = 160;
+  //          int lineoffset = imgArtist1.Location.Y;
+
+            int[] lineoffset =
+            {
+                imgSong1.Location.Y,
+                imgSong2.Location.Y,
+                imgSong3.Location.Y,
+                imgSong4.Location.Y,
+                imgSong5.Location.Y,
+                imgSong6.Location.Y,
+                imgSong7.Location.Y,
+                imgSong8.Location.Y,
+                imgSong9.Location.Y,
+                imgSong10.Location.Y,
+            };
 
             for (int i = 0; i < 10; i++)
             {
@@ -132,11 +146,9 @@ namespace SpotifyPlus
                 separator.Height = 1; //Controls height, obviously
                 separator.Width = this.ClientSize.Width - 10; //This should make it almost the entire length of the window
                 separator.BackColor = lineColors[i % 2]; //Alternates between the two colors
-                separator.Location = new Point(10, lineoffset + 67); //Should Align with images, maybe need more.
+                separator.Location = new Point(10, lineoffset[i] + 67); //Should Align with images, maybe need more.
 
-                this.Controls.Add(separator);
-
-                lineoffset += 70; 
+                this.Controls.Add(separator); 
             }
 
             //genres
