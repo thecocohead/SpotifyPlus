@@ -140,13 +140,16 @@ namespace SpotifyPlus
                 imgSong10.Location.Y,
             };
 
+            int linemidpoint = ((imgSong1.Location.Y + imgSong1.Height) + imgSong2.Location.Y) / 2;
+            int linedifference = linemidpoint - (imgSong1.Location.Y + imgSong1.Height);
+
             for (int i = 0; i < 10; i++)
             {
                 Panel separator = new Panel();
                 separator.Height = 1; //Controls height, obviously
                 separator.Width = this.ClientSize.Width - 10; //This should make it almost the entire length of the window
                 separator.BackColor = lineColors[i % 2]; //Alternates between the two colors
-                separator.Location = new Point(10, lineoffset[i] + 67); //Should Align with images, maybe need more.
+                separator.Location = new Point(10, lineoffset[i] + imgSong1.Height + linedifference); //Should Align with images
 
                 this.Controls.Add(separator); 
             }
